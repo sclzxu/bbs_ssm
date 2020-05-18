@@ -26,6 +26,7 @@ public class InitListener implements ServletContextListener {
 			User user = new User();
 			user.setUserId("admin");
 			user.setUserPsw(DigestUtils.md5Hex("666666"));
+			user.setUserAlice("系统管理员");
 			user.setUserLevel(level);
 			user.setUserCreateDate(new Date());
 			// 添加用户

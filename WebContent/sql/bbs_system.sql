@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: bbs_system
 Target Host: localhost
 Target Database: bbs_system
-Date: 5/18/2020 11:24:01 AM
+Date: 5/18/2020 3:39:56 PM
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,7 +75,7 @@ CREATE TABLE `bbs_plate` (
   `plateMessage` varchar(128) DEFAULT NULL,
   `isEnable` int(11) DEFAULT '0',
   PRIMARY KEY (`plateId`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for bbs_store
@@ -106,8 +106,8 @@ CREATE TABLE `bbs_system_ans` (
 CREATE TABLE `bbs_user` (
   `userId` varchar(32) NOT NULL,
   `userPsw` varchar(32) NOT NULL,
-  `userAlice` varchar(64) NOT NULL,
-  `userEmail` varchar(64) NOT NULL,
+  `userAlice` varchar(64) DEFAULT NULL,
+  `userEmail` varchar(64) DEFAULT NULL,
   `userSex` varchar(1) DEFAULT '男',
   `userPhoto` varchar(128) DEFAULT 'xxx.jpg',
   `userScore` double DEFAULT '0',
@@ -126,3 +126,4 @@ INSERT INTO `bbs_level` VALUES ('5', '系统管理员');
 INSERT INTO `bbs_level` VALUES ('6', '初级会员');
 INSERT INTO `bbs_level` VALUES ('7', '中级会员');
 INSERT INTO `bbs_level` VALUES ('8', '高级会员');
+INSERT INTO `bbs_user` VALUES ('admin', 'f379eaf3c831b04de153469d1bec345e', null, null, '男', 'xxx.jpg', '0', '5', null, null, '2020-05-18', '0');

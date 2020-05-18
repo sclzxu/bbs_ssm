@@ -97,13 +97,15 @@ public class InitDao {
 		PreparedStatement ps = null;
 		try {
 			conn = DriverManager.getConnection(URL,USER,PASSWORD);
-			String sql = "insert into bbs_user(userId,userPsw,userLevel,userCreateDate) " + 
-					"values(?,?,?,?)";
+			String sql 
+				= "insert into bbs_user(userId,userPsw,userLevel,userCreateDate,userAlice)" 
+						+" values(?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1,user.getUserId());
 			ps.setString(2,user.getUserPsw());
 			ps.setInt(3,user.getUserLevel().getLevelId());
 			ps.setObject(4,user.getUserCreateDate());
+			ps.setString(5,user.getUserAlice());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
