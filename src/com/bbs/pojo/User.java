@@ -2,8 +2,15 @@ package com.bbs.pojo;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class User {
+	@NotBlank(message="账户不能为空")
+	@Length(min=5,message="账户字符不能少于5个")
 	private String userId;
+	@NotBlank(message="密码不能为空")
+	@Length(min=5,message="密码字符不能少于5个")
 	private String userPsw;
 	private String userAlice;
 	private String userEmail;

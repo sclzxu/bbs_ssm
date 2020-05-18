@@ -9,7 +9,12 @@
 			<id property="levelId" column="levelId"/>
 		</association>
 	</resultMap>
-	
+	<!-- 根据账户和密码查找对应账户信息 -->
+	<select id="findUserByIdAndPsw" resultMap="userMap">
+		select * from bbs_user left join bbs_level
+			on bbs_user.userLevel=bbs_level.levelId
+			where userId=#{userId} and userPsw=#{userPsw}
+	</select>
 </mapper>
 
 

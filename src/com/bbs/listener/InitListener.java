@@ -12,6 +12,7 @@ import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 import com.bbs.service.InitService;
 
+// 监听器
 public class InitListener implements ServletContextListener {
 	private InitService initService = new InitService();
 	// 在系统启动的时候执行
@@ -19,7 +20,7 @@ public class InitListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 		// 调用服务
 		List<User> users = initService.findUsersByLevelMessage("系统管理员");
-		if(null==users || users.size()==0) {// 没有系统管理员
+		if(users.size()==0) {// 没有系统管理员
 			// 查找对应 levelMessage 的 Level 对象
 			Level level = initService.findLevelByLevelMessage("系统管理员");
 			// 创建 User 对象
