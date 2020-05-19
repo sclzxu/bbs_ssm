@@ -23,6 +23,7 @@ public class UserController {
 	public String login(@ModelAttribute User user) {
 		return "login";
 	}
+	// 登录校验
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(@Valid User user,BindingResult bindingResult,HttpSession session,Model model) {
 		model.addAttribute("user",user);
