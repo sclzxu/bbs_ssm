@@ -1,6 +1,7 @@
 package com.bbs.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -28,7 +29,10 @@ public class ServerController {
 	}
 	// 访问板块管理界面
 	@RequestMapping(value="/manage_plate",method=RequestMethod.GET)
-	public String managePlate() {
+	public String managePlate(Model model) {
+		// 获取所有的板块信息
+		List<Plate> plates = serverService.findAllPlates();
+		model.addAttribute("plates",plates);
 		return "manage_plate";
 	}
 	// 访问添加板块界面

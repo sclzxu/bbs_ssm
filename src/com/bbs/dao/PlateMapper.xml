@@ -12,6 +12,10 @@
 		insert into bbs_plate(plateTitle,plateMessage) 
 			values(#{plateTitle},#{plateMessage})
 	</insert>
+	<!-- 获取所有的 Plate -->
+	<select id="findAllPlates" resultType="Plate">
+		select * from bbs_plate
+	</select>
 </mapper>
 
 
