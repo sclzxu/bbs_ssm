@@ -54,6 +54,13 @@
    		 <property name="maxUploadSize" value="1048576"/>
    		 <property name="defaultEncoding" value="UTF-8"/>
     </bean>
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+    	<mvc:interceptor>
+			<mvc:mapping path="/server/**"/>
+    		<bean class="com.bbs.interceptor.ServerInterceptor" />
+    	</mvc:interceptor>
+    </mvc:interceptors>
 </beans>
 
 
