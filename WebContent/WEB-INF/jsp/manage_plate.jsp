@@ -99,16 +99,16 @@
             <tbody>
             <c:forEach items="${plates}" var="plate" varStatus="status">
             	<tr class="gradeC">
-            		<td>${plate.plateTitle }</td>
+            		<td><a href="#?${plate.plateId }">${plate.plateTitle }</a></td>
             		<td>${plate.plateMessage }</td>
             		<c:choose>
             			<c:when test="${plate.isEnable==0}">
-            				<td>未屏蔽</td>
-            				<td class="center"><a href="#?${plate.plateId }">点击屏蔽</a></td>
+            				<td class="center">未屏蔽</td>
+            				<td class="center"><a href="${pageContext.request.contextPath}/server/manage_plate_shield/${plate.plateId }">屏蔽板块</a></td>
             			</c:when>
             			<c:otherwise>
-            				<td>已屏蔽</td>
-            				<td class="center"><a href="#?${plate.plateId }">解除屏蔽</a></td>
+            				<td class="center">已屏蔽</td>
+            				<td class="center"><a href="${pageContext.request.contextPath}/server/manage_plate_unshield/${plate.plateId }">解除屏蔽</a></td>
             			</c:otherwise>
             		</c:choose>
             	</tr>

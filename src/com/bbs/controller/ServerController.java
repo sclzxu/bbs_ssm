@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,7 +51,7 @@ public class ServerController {
 			return "manage_add_plate";
 		}
 		serverService.addNewPlate(plate);
-		return "manage_plate";
+		return "redirect:/server/manage_plate";
 	}
 	// 异步校验板块标题是否已经存在
 	@RequestMapping(value="manage_palte_exists",method=RequestMethod.POST)
@@ -63,5 +64,17 @@ public class ServerController {
 		else
 			map.put("status","exists");
 		return JSON.toJSONString(map);
+	}
+	// 屏蔽掉对应 plateId 的板块
+	@RequestMapping(value="/manage_plate_shield/{plateId}",method=RequestMethod.GET)
+	public String managePlateShield(@PathVariable Integer plateId) {
+		serverService.updatePlateIsEnableById(plateId);
+		return "redirect:/server/manage_plate";
+	}
+	// 解除掉对应 plateId 的 plate的屏蔽状态
+	@RequestMapping(value="/manage_plate_unshield/{plateId}",method=RequestMethod.GET)
+	public String managePlateUnShield(@PathVariable Integer plateId) {
+		serverService.updatePlateUnIsEnableById(plateId);
+		return "redirect:/server/manage_plate";
 	}
 }

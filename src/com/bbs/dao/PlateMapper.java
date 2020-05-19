@@ -10,4 +10,8 @@ public interface PlateMapper {
 	int addNewPlate(Plate plate);
 	
 	List<Plate> findAllPlates();
+	
+	int updatePlateIsEnableById(Integer plateId);
+	
+	int updatePlateUnIsEnableById(Integer plateId);
 }

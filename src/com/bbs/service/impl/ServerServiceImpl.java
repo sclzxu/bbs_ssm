@@ -29,5 +29,15 @@ public class ServerServiceImpl implements ServerService {
 	public List<Plate> findAllPlates() {
 		return plateMapper.findAllPlates();
 	}
+	// 根据 id 修改对应 plate 为屏蔽状态
+	@Override
+	public int updatePlateIsEnableById(Integer plateId) {
+		return plateMapper.updatePlateIsEnableById(plateId);
+	}
+	// 根据 id 修改对应的 plate 为解除屏蔽状态
+	@Override
+	public int updatePlateUnIsEnableById(Integer plateId) {
+		return plateMapper.updatePlateUnIsEnableById(plateId);
+	}
 
 }

@@ -16,6 +16,14 @@
 	<select id="findAllPlates" resultType="Plate">
 		select * from bbs_plate
 	</select>
+	<!-- 修改 plate 的 isEnable为1 -->
+	<update id="updatePlateIsEnableById" parameterType="int">
+		update bbs_plate set isEnable=1 where plateId=#{plateId}
+	</update>
+	<!-- 修改 plate 的 isEnable为0 -->
+	<update id="updatePlateUnIsEnableById" parameterType="int">
+		update bbs_plate set isEnable=0 where plateId=#{plateId}
+	</update>
 </mapper>
 
 
