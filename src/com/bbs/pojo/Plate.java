@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 public class Plate {
 	private Integer plateId;
-	@Length(min=4,message="长度不能小于4个字符")
+	@Length(min=2,message="长度不能小于2个字符")
 	private String plateTitle;
 	private String plateMessage;
 	private Integer isEnable;

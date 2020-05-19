@@ -14,4 +14,8 @@ public interface ServerService {
 	int updatePlateIsEnableById(Integer plateId);
 	
 	int updatePlateUnIsEnableById(Integer plateId);
+	
+	Plate findPlateById(Integer plateId);
+	
+	int updatePlateById(Plate plate);
 }

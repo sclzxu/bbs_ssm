@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,13 @@ public class ServerController {
 	}
 	// 实现添加板块功能
 	@RequestMapping(value="/manage_add_plate",method=RequestMethod.POST)
-	public String manageAddPlate(@ModelAttribute Plate plate,Model model) {
+	public String manageAddPlate(@Valid Plate plate,BindingResult bindingResult,
+			Model model) {
+		model.addAttribute("plate", plate);
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("error", "标题不能少于两个字符");
+			return "manage_add_plate";
+		}
 		// 判断是否已经存在同标题的板块
 		Plate result = serverService.findPlateByTitle(plate.getPlateTitle());
 		if(result != null) {
@@ -76,5 +84,34 @@ public class ServerController {
 	public String managePlateUnShield(@PathVariable Integer plateId) {
 		serverService.updatePlateUnIsEnableById(plateId);
 		return "redirect:/server/manage_plate";
+	}
+	// 跳转到 manage_alter_plate.jsp 页面
+	@RequestMapping(value="/manage_alter_plate/{plateId}",method=RequestMethod.GET)
+	public String manageAlterPlate(@PathVariable Integer plateId,Model model) {
+		// 根据 id 查找 plate
+		Plate result = serverService.findPlateById(plateId);
+		model.addAttribute("plate", result);
+		return "manage_alter_plate";
+	}
+	// 根据 id 修改对的板块信息
+	@RequestMapping(value="/manage_alter_plate",method=RequestMethod.POST)
+	public String manageAlterPlate(@Valid Plate plate,BindingResult bindingResult,
+			Model model) {
+		model.addAttribute("plate", plate);
+		if(bindingResult.hasErrors()) { // 校验失败
+			model.addAttribute("error","标题不能少于两个字符");
+			return "manage_alter_plate";
+		}
+		// 根据板块标题查找板块信息
+		Plate result = serverService.findPlateByTitle(plate.getPlateTitle());
+		// 判断查找到的这个 Plate 是否存在并且是否是当前的 Plate（标题重名）
+		if(result!=null && result.getPlateId()!=plate.getPlateId()) {
+			model.addAttribute("error","标题重复了");
+			return "manage_alter_plate";
+		}
+		// 根据 id 修改板块信息
+		serverService.updatePlateById(plate);
+		model.addAttribute("error", "修改成功");
+		return "manage_alter_plate";
 	}
 }

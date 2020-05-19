@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>板块列表</title>
+<title>板块修改</title>
 <link href="${pageContext.request.contextPath}/statics/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
@@ -78,44 +78,39 @@
     
     <!-- Main content wrapper -->
     <div class="wrapper">
-		<div class="oneTwo"></div>
-    	<div class="oneTwo">
-    		<div class="oneTwo"></div>
- 			<div class="oneTwo"><a href="${pageContext.request.contextPath}/server/manage_add_plate" title="" class="wContentButton greenwB">添加板块</a></div>
- 			<div class="clear"></div>
-       	</div>
-    	<!-- Dynamic table -->
-        <div class="widget">
-            <div class="title"><img src="images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>板块信息</h6></div>                          
-            <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
-            <thead>
-            <tr>
-            <th>标题</th>
-            <th>描述</th>
-            <th>是否屏蔽</th>
-            <th>屏蔽操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${plates}" var="plate" varStatus="status">
-            	<tr class="gradeC">
-            		<td><a href="${pageContext.request.contextPath}/server/manage_alter_plate/${plate.plateId}">${plate.plateTitle }</a></td>
-            		<td>${plate.plateMessage }</td>
-            		<c:choose>
-            			<c:when test="${plate.isEnable==0}">
-            				<td class="center">未屏蔽</td>
-            				<td class="center"><a href="${pageContext.request.contextPath}/server/manage_plate_shield/${plate.plateId }">屏蔽板块</a></td>
-            			</c:when>
-            			<c:otherwise>
-            				<td class="center">已屏蔽</td>
-            				<td class="center"><a href="${pageContext.request.contextPath}/server/manage_plate_unshield/${plate.plateId }">解除屏蔽</a></td>
-            			</c:otherwise>
-            		</c:choose>
-            	</tr>
-            </c:forEach>
-            </tbody>
-            </table>  
+    	<!-- Note -->
+        <div class="nNote nInformation hideit">
+            <p>${error }</p>
         </div>
+    	<!-- Validation form -->
+    	<form:form cssClass="form" method="post" modelAttribute="plate" 
+    			action="${pageContext.request.contextPath}/server/manage_alter_plate">
+    		<form:hidden path="plateId"/>
+        	<fieldset>
+                <div class="widget">
+                    <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>板块修改</h6></div>
+                    <div class="formRow">
+                    	<form:label path="plateTitle">板块标题:<span class="req">*</span></form:label>
+                        <div class="formRight">
+                        	<form:input path="plateTitle" cssClass="validate[required]"/>
+                        	<form:errors path="plateTitle" cssStyle="color:red;"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<form:label path="plateMessage">板块描述:<span class="req">*</span></form:label>
+                        <div class="formRight">
+                        	<form:textarea path="plateMessage" rows="8" cols="" cssClass="validate[required]"/>
+                        	<form:errors path="plateMessage" cssStyle="color:red;"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formSubmit"><input type="submit" value="修改" class="redB" /></div>
+                    <div class="clear"></div>
+                </div>
+                
+            </fieldset>
+    	</form:form>
     </div>
     
     <!-- Footer line -->
@@ -124,7 +119,6 @@
 </div>
 
 <div class="clear"></div>
-
 </body>
 </html>
 

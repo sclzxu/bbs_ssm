@@ -24,6 +24,15 @@
 	<update id="updatePlateUnIsEnableById" parameterType="int">
 		update bbs_plate set isEnable=0 where plateId=#{plateId}
 	</update>
+	<!-- 根据 plateId 查找对应plate -->
+	<select id="findPlateById" parameterType="int" resultType="Plate">
+		select * from bbs_plate where plateId=#{plateId}
+	</select>
+	<!-- 根据 id 修改板块的标题和描述 -->
+	<update id="updatePlateById" parameterType="Plate">
+		update bbs_plate set plateTitle=#{plateTitle},plateMessage=#{plateMessage}
+			where plateId=#{plateId}
+	</update>
 </mapper>
 
 

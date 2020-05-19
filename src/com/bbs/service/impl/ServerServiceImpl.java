@@ -39,5 +39,15 @@ public class ServerServiceImpl implements ServerService {
 	public int updatePlateUnIsEnableById(Integer plateId) {
 		return plateMapper.updatePlateUnIsEnableById(plateId);
 	}
+	// 根据 id 查找对应 plate
+	@Override
+	public Plate findPlateById(Integer plateId) {
+		return plateMapper.findPlateById(plateId);
+	}
+	// 根据 id 修改板块的标题和描述
+	@Override
+	public int updatePlateById(Plate plate) {
+		return plateMapper.updatePlateById(plate);
+	}
 
 }
