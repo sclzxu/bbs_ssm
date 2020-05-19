@@ -61,7 +61,7 @@
         <div class="wrapper">
         	<div class="controlB">
             	<ul>
-                	<li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/control/32/plus.png" alt="" /><span>Add new session</span></a></li>
+                	<li><a href="${pageContext.request.contextPath}/server/manage_plate" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/control/32/plus.png" alt="" /><span>板块管理</span></a></li>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/control/32/database.png" alt="" /><span>New DB entry</span></a></li>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/control/32/hire-me.png" alt="" /><span>Add new user</span></a></li>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/control/32/statistics.png" alt="" /><span>Check statistics</span></a></li>
