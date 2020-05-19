@@ -7,6 +7,11 @@
 	<select id="findPlateByTitle" resultType="Plate">
 		select * from bbs_plate where plateTitle=#{plateTitle}
 	</select>
+	<!-- 添加新板块到数据库中 -->
+	<insert id="addNewPlate" parameterType="Plate">
+		insert into bbs_plate(plateTitle,plateMessage) 
+			values(#{plateTitle},#{plateMessage})
+	</insert>
 </mapper>
 
 

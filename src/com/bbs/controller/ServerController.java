@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +35,18 @@ public class ServerController {
 	@RequestMapping(value="/manage_add_plate",method=RequestMethod.GET)
 	public String manageAddPlate(@ModelAttribute Plate plate) {
 		return "manage_add_plate";
+	}
+	// 实现添加板块功能
+	@RequestMapping(value="/manage_add_plate",method=RequestMethod.POST)
+	public String manageAddPlate(@ModelAttribute Plate plate,Model model) {
+		// 判断是否已经存在同标题的板块
+		Plate result = serverService.findPlateByTitle(plate.getPlateTitle());
+		if(result != null) {
+			model.addAttribute("error", "不能添加同标题的板块");
+			return "manage_add_plate";
+		}
+		serverService.addNewPlate(plate);
+		return "manage_plate";
 	}
 	// 异步校验板块标题是否已经存在
 	@RequestMapping(value="manage_palte_exists",method=RequestMethod.POST)

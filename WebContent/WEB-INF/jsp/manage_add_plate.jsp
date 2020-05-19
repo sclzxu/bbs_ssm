@@ -78,8 +78,13 @@
     
     <!-- Main content wrapper -->
     <div class="wrapper">
+    	<!-- Note -->
+        <div class="nNote nInformation hideit">
+            <p>${error }</p>
+        </div>
     	<!-- Validation form -->
-    	<form:form cssClass="form" method="post" modelAttribute="plate" action="">
+    	<form:form cssClass="form" method="post" modelAttribute="plate" 
+    			action="${pageContext.request.contextPath}/server/manage_add_plate">
         	<fieldset>
                 <div class="widget">
                     <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>添加板块</h6></div>
