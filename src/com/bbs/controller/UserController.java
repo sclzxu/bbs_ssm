@@ -42,6 +42,6 @@ public class UserController {
 		// 判断其权限
 		if(result.getUserLevel().getLevelMessage().equals("系统管理员")) 
 			return "manage";
-		return "index";
+		return "redirect:/";
 	}
 }
