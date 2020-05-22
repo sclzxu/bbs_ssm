@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.CategoryMapper">
+	<!-- 根据分类名称查找分类 -->
+	<select id="findCategoryByTitle" parameterType="string" resultType="Category">
+		select * from bbs_category where category=#{category}
+	</select>
+	<!-- 添加新分类（不能填相同名称的分类）-->
+	<insert id="addNewCategory" parameterType="string">
+		insert into bbs_category(category) values(#{category})
+	</insert>
+	<!-- 查找所有分类 -->
+	<select id="findAllCategories" resultType="Category">
+		select * from bbs_category
+	</select>
+	<!-- 根据 categoryId 获取分类信息 -->
+	<select id="findCategoryById" resultType="Category">
+		select * from bbs_category where categoryId=#{categoryId}
+	</select>
+	<!-- 根据 id 修改分类名称 -->
+	<update id="updateCategoryById" parameterType="Category">
+		update bbs_category set category=#{category} where categoryId=#{categoryId}
+	</update>
+</mapper>
+
+
+

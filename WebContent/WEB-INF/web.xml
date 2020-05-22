@@ -48,6 +48,7 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
   <!-- 系统启动初始化服务 -->
   <listener>
   	<listener-class>com.bbs.listener.InitListener</listener-class>

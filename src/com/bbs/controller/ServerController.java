@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.bbs.pojo.Category;
 import com.bbs.pojo.Plate;
 import com.bbs.service.ServerService;
 
@@ -114,4 +115,59 @@ public class ServerController {
 		model.addAttribute("error", "修改成功");
 		return "manage_alter_plate";
 	}
+	// 跳转到分类列表页面
+	@RequestMapping(value="/manage_category",method=RequestMethod.GET)
+	public String manageCategory(Model model) {
+		List<Category> categories = serverService.findAllCategories();
+		model.addAttribute("categories", categories);
+		return "manage_category";
+	}
+	// 跳转到添加分页页面
+	@RequestMapping(value="/manage_add_category",method=RequestMethod.GET)
+	public String manageAddCategory(@ModelAttribute Category category) {
+		return "manage_add_category";
+	}
+	// 实现添加分类功能
+	@RequestMapping(value="/manage_add_category",method=RequestMethod.POST)
+	public String manageAddCategory(@Valid Category category,BindingResult bindingResult,
+			Model model) {
+		model.addAttribute("category", category);
+		if(bindingResult.hasErrors()) {
+			return "manage_add_category";
+		}
+		if(serverService.addNewCategory(category.getCategory()) == 0) {
+			model.addAttribute("error","不同添加相同的分类名称");
+			return "manage_add_category";
+		}
+		return "redirect:/server/manage_category";
+	}
+	// 跳转到分类修改页面
+	@RequestMapping(value="/manage_alter_category/{categoryId}",method=RequestMethod.GET)
+	public String manageAlterCategory(@PathVariable Integer categoryId,Model model) {
+		// 根据 id 获取分类类型
+		Category category = serverService.findCategoryById(categoryId);
+		model.addAttribute("category", category);
+		return "manage_alter_category";
+	}
+	// 实现修改分类功能
+	@RequestMapping(value="/manage_alter_category",method=RequestMethod.POST)
+	public String manageAlterCategory(@ModelAttribute Category category,Model model) {
+		// 根据标题获取分类类型
+		Category result = serverService.findCategoryByTitle(category.getCategory());
+		// 判断输入的新标题是否跟其他的标题同名
+		if(result!=null && result.getCategoryId()!=category.getCategoryId()) {
+			model.addAttribute("error","此分类已经存在");
+			return "manage_alter_category";
+		}
+		// 修改分类名称
+		serverService.updateCategoryById(category);
+		model.addAttribute("error", "修改分类名称成功");
+		return "manage_alter_category";
+	}
 }
+
+
+
+
+
+

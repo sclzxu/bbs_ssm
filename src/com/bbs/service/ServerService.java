@@ -2,6 +2,7 @@ package com.bbs.service;
 
 import java.util.List;
 
+import com.bbs.pojo.Category;
 import com.bbs.pojo.Plate;
 
 public interface ServerService {
@@ -18,4 +19,27 @@ public interface ServerService {
 	Plate findPlateById(Integer plateId);
 	
 	int updatePlateById(Plate plate);
+	
+	Category findCategoryByTitle(String category);
+	
+	int addNewCategory(String category);
+	
+	List<Category> findAllCategories();
+	
+	Category findCategoryById(Integer categoryId);
+	
+	int updateCategoryById(Category category);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
