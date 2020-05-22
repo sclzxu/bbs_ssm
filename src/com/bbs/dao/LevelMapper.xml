@@ -3,7 +3,10 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bbs.dao.LevelMapper">
-	
+	<!-- 根据 levelMessage 查找 Level -->
+	<select id="findLevelByMessage" resultType="Level">
+		select * from bbs_level where levelMessage=#{levelMessage}
+	</select>
 </mapper>
 
 

@@ -44,4 +44,10 @@ public class UserController {
 			return "manage";
 		return "redirect:/";
 	}
+	// 实现登出功能
+	@RequestMapping("/loginout")
+	public String loginout(HttpSession session) {
+		session.removeAttribute("loginer");
+		return "redirect:/";
+	}
 }

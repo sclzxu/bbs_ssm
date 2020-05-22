@@ -4,36 +4,6 @@
     
     <div class="sidebarSep mt0"></div>
     
-    <!-- Search widget -->
-    <form action="" class="sidebarSearch">
-        <input type="text" name="search" placeholder="search..." id="ac" />
-        <input type="submit" value="" />
-    </form>
-    
-    <div class="sidebarSep"></div>
-
-    <!-- General balance widget -->
-    <div class="genBalance">
-        <a href="#" title="" class="amount">
-            <span>General balance:</span>
-            <span class="balanceAmount">$10,900.36</span>
-        </a>
-        <a href="#" title="" class="amChanges">
-            <strong class="sPositive">+0.6%</strong>
-        </a>
-    </div>
-    
-    <!-- Next update progress widget -->
-    <div class="nextUpdate">
-        <ul>
-            <li>Next update in:</li>
-            <li>23 hrs 14 min</li>
-        </ul>
-        <div class="pWrapper"><div class="progressG" title="78%"></div></div>
-    </div>
-    
-    <div class="sidebarSep"></div>
-    
     <!-- Left navigation -->
     <ul id="menu" class="nav">
         <li class="dash"><a href="index.html" title=""><span>Dashboard</span></a></li>

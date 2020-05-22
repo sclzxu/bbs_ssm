@@ -15,6 +15,19 @@
 			on bbs_user.userLevel=bbs_level.levelId
 			where userId=#{userId} and userPsw=#{userPsw}
 	</select>
+	<!-- 根据 userId 查找 User -->
+	<select id="findUserById" resultMap="userMap">
+		select * from bbs_user left join bbs_level
+			on bbs_user.userLevel=bbs_level.levelId
+			where userId=#{userId}
+	</select>
+	<!-- 添加账户信息 -->
+	<insert id="addNewUser" parameterType="user">
+		insert into bbs_user(userId,userPsw,userAlice,userEmail,
+			userSex,userLevel,userCreateDate)
+			values(#{userId},#{userPsw},#{userAlice},#{userEmail},
+			#{userSex},#{userLevel.levelId},#{userCreateDate})
+	</insert>
 </mapper>
 
 
