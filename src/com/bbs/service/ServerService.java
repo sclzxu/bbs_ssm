@@ -3,6 +3,7 @@ package com.bbs.service;
 import java.util.List;
 
 import com.bbs.pojo.Category;
+import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Plate;
 
 public interface ServerService {
@@ -29,6 +30,10 @@ public interface ServerService {
 	Category findCategoryById(Integer categoryId);
 	
 	int updateCategoryById(Category category);
+	
+	int delCategoryById(Integer categoryId);
+	
+	List<Invitation> findAllInvitationByCategoryId(Integer categoryId);
 }
 
 

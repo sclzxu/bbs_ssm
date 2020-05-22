@@ -23,6 +23,10 @@
 	<update id="updateCategoryById" parameterType="Category">
 		update bbs_category set category=#{category} where categoryId=#{categoryId}
 	</update>
+	<!-- 根据 id 删除分类 -->
+	<delete id="delCategoryById" parameterType="int">
+		delete from bbs_category where categoryId=#{categoryId}
+	</delete>
 </mapper>
 
 

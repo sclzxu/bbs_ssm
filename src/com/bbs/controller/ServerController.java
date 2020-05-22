@@ -164,6 +164,11 @@ public class ServerController {
 		model.addAttribute("error", "修改分类名称成功");
 		return "manage_alter_category";
 	}
+	@RequestMapping(value="/del_category/{categoryId}",method=RequestMethod.GET)
+	public String delCategory(@PathVariable Integer categoryId) {
+		serverService.delCategoryById(categoryId);
+		return "redirect:/server/manage_category";
+	}
 }
 
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.InvitationMapper">
+	<!-- 根据分类 id 查找对应的所有的贴子列表 -->
+	<select id="findAllInvitationByCategoryId" resultType="Invitation">
+		select * from bbs_invitation where categoryId=#{categoryId}
+	</select>
+</mapper>
+
+
+

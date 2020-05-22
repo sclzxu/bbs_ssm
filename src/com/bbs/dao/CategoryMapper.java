@@ -14,4 +14,10 @@ public interface CategoryMapper {
 	Category findCategoryById(Integer categoryId);
 	
 	int updateCategoryById(Category category);
+	
+	int delCategoryById(Integer categoryId);
 }
+
+
+
+

@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.bbs.dao.CategoryMapper;
+import com.bbs.dao.InvitationMapper;
 import com.bbs.dao.PlateMapper;
 import com.bbs.pojo.Category;
+import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Plate;
 import com.bbs.service.ServerService;
 
@@ -18,6 +20,8 @@ public class ServerServiceImpl implements ServerService {
 	private PlateMapper plateMapper;
 	@Resource
 	private CategoryMapper categoryMapper;
+	@Resource
+	private InvitationMapper invitationMapper;
 	// 根据板块名称查找对应板块
 	@Override
 	public Plate findPlateByTitle(String plateTitle) {
@@ -79,6 +83,20 @@ public class ServerServiceImpl implements ServerService {
 	@Override
 	public int updateCategoryById(Category category) {
 		return categoryMapper.updateCategoryById(category);
+	}
+	// 根据分类 id 删除分类
+	@Override
+	public int delCategoryById(Integer categoryId) {
+		// 已经存在贴子的分类，不能删除
+		List<Invitation> invitations = findAllInvitationByCategoryId(categoryId);
+		if(invitations.size() != 0)
+			return 0;
+		return categoryMapper.delCategoryById(categoryId);
+	}
+	// 根据分类 id 获取所有对应的贴子列表
+	@Override
+	public List<Invitation> findAllInvitationByCategoryId(Integer categoryId) {
+		return invitationMapper.findAllInvitationByCategoryId(categoryId);
 	}
 
 }

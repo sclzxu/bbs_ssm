@@ -91,7 +91,7 @@
                		<c:forEach items="${categories}" var="ctg">
                			<li>
                         	<div style="width: 101px;height: 101px;font-size: 16px;vertical-align: middle;line-height: 101px;">
-                        		<a href="#"><img src="${pageContext.request.contextPath}/statics/image/icons/delete.png" alt="" style="float: right;" /></a>
+                        		<a href="${pageContext.request.contextPath}/server/del_category/${ctg.categoryId }"><img src="${pageContext.request.contextPath}/statics/image/icons/delete.png" alt="" style="display:block;float: right;width:16px;margin: 0px;" /></a>
                             	<a href="${pageContext.request.contextPath}/server/manage_alter_category/${ctg.categoryId }">${ctg.category}</a>
                        		</div>
                     	</li>
