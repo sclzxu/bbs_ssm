@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.bbs.pojo.Category;
+import com.bbs.pojo.Level;
 import com.bbs.pojo.Plate;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
@@ -188,6 +189,46 @@ public class ServerController {
 		User user = clientService.findUserById(userId);
 		model.addAttribute("user", user);
 		return "manage_view_user";
+	}
+	// 跳转到操作账户界面
+	@RequestMapping(value="/manage_opt_user/{userId}",method=RequestMethod.GET)
+	public String manageOptUser(@PathVariable String userId,Model model) {
+		// 根据 userId 获取 User
+		User user = clientService.findUserById(userId);
+		model.addAttribute("user", user);
+		return "manage_opt_user";
+	}
+	// 提升等级
+	@RequestMapping(value="/uplevel",method=RequestMethod.GET)
+	public String upLevel(String userId,Model model) {
+		// 根据 id 获取 User
+		User user = clientService.findUserById(userId);
+		model.addAttribute("user", user);
+		// 验证是否可以提升等级
+		if(user.getUserLevel().getLevelMessage().equals("高级会员") 
+				|| user.getUserLevel().getLevelMessage().equals("系统管理员")) {
+			model.addAttribute("error", "不能再提升等级");
+			return "manage_opt_user";
+		}
+		// 提升等级
+		String[] levels = {"初级会员","中级会员","高级会员"};
+		// 获取下一个等级标题
+		int index = 0;
+		for(int i = 0;i < levels.length;i++) {
+			if(levels[i].equals(user.getUserLevel().getLevelMessage())) {
+				index = i;
+				break;
+			}	
+		}
+		String next = levels[index+1];
+		// 通过 levelMessage 获取 Level
+		Level level = clientService.findLevelByMessage(next);
+		user.setUserLevel(level);
+		// 通过数据库去修改会员的 levelId
+		serverService.updateUserLevelById(userId, level.getLevelId());
+		model.addAttribute("error", "提升等级成功");
+		
+		return "manage_opt_user";
 	}
 }
 

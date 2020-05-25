@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>用户管理</title>
+<title>用户操作</title>
 <link href="${pageContext.request.contextPath}/statics/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
@@ -59,7 +57,13 @@
 
 <script src="${pageContext.request.contextPath}/statics/js/custom.js"></script>
 
-<!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  --></head>
+<!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  -->
+<style>
+.wContentButton{
+	margin-top: 0px;
+}
+</style>
+</head>
 
 <body>
 
@@ -79,36 +83,57 @@
     
     <!-- Main content wrapper -->
     <div class="wrapper">
-    	<!-- Dynamic table -->
-        <div class="widget">
-            <div class="title"><img src="images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>用户信息</h6></div>                          
-            <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
-            <thead>
-            <tr>
-            <th>账户</th>
-            <th>昵称</th>
-            <th>性别</th>
-            <th>邮箱</th>
-            <th>创建日期</th>
-            <th>用户等级</th>
-            <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${users}" var="user">
-            	<tr class="gradeC">
-            		<td><a href="${pageContext.request.contextPath}/server/manage_view_user/${user.userId }">${user.userId }</a></td>
-            		<td>${user.userAlice }</td>
-            		<td>${user.userSex }</td>
-            		<td>${user.userEmail }</td>
-            		<td><fmt:formatDate value="${user.userCreateDate}" pattern="yyyy年MM月dd日"/></td>
-            		<td>${user.userLevel.levelMessage }</td>
-            		<td><a href="${pageContext.request.contextPath}/server/manage_opt_user/${user.userId }">相关操作</a></td>
-            	</tr>
-            </c:forEach>
-            </tbody>
-            </table>  
+    	<div class="nNote nInformation hideit">
+            <p>${error }</p>
         </div>
+    	<!-- Validation form -->
+    	<form action="" class="form">
+        	<fieldset>
+                <div class="widget">
+                    <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>用户操作</h6></div>
+                    <div class="formRow">
+                    	<label for="userId">账户:</label>
+                        <div class="formRight">
+                        	<input id="userId" type="text" value="${user.userId }" readonly="readonly"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<label for="userLevel">等级:</label>
+                        <div class="formRight">
+                        	<input id="userLevel" type="text" value="${user.userLevel.levelMessage }" readonly="readonly"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<label for="userLevel">提升等级:</label>
+                        <div class="formRight">
+                        	<div class="oneFour" style="margin-left: 5px;"><a href="${pageContext.request.contextPath}/server/uplevel?userId=${user.userId}" title="" class="wContentButton bluewB">等级提升</a></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<label>暂时降级:</label>
+                    	<div class="formRight">
+                        	<div class="datepickerInline"></div>
+                        	<div class="oneFour"><a href="#" title="" class="wContentButton redwB">暂时降级</a></div>
+                    	</div>
+                    	<div class="clear"></div>
+                	</div>
+                	<div class="formRow">
+                    	<label>锁定账户:</label>
+                    	<div class="formRight">
+                        	<div class="datepickerInline"></div>
+                        	<div class="oneFour"><a href="#" title="" class="wContentButton redwB">锁定账户</a></div>
+                    	</div>
+                    	<div class="clear"></div>
+                	</div>
+                    
+                    <div class="clear"></div>
+                </div>
+                
+            </fieldset>
+    	</form>
     </div>
     
     <!-- Footer line -->

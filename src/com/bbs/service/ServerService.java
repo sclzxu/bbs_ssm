@@ -37,6 +37,8 @@ public interface ServerService {
 	List<Invitation> findAllInvitationByCategoryId(Integer categoryId);
 	
 	List<User> findAllUsers();
+	
+	int updateUserLevelById(String userId,Integer userLevel);
 }
 
 

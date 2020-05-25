@@ -33,6 +33,10 @@
 		select * from bbs_user left join bbs_level
 			on bbs_user.userLevel=bbs_level.levelId 
 	</select>
+	<!-- 通过 userId 修改 userLevel -->
+	<update id="updateUserLevelById">
+		update bbs_user set userLevel=#{userLevel} where userId=#{userId}
+	</update>
 </mapper>
 
 

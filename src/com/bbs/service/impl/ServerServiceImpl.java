@@ -107,5 +107,10 @@ public class ServerServiceImpl implements ServerService {
 	public List<User> findAllUsers() {
 		return userMapper.findAllUsers();
 	}
+	// 通过 userId 修改 userLevel
+	@Override
+	public int updateUserLevelById(String userId, Integer userLevel) {
+		return userMapper.updateUserLevelById(userId, userLevel);
+	}
 
 }

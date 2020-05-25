@@ -15,4 +15,7 @@ public interface UserMapper {
 	int addNewUser(User user);
 	
 	List<User> findAllUsers();
+	
+	int updateUserLevelById(@Param("userId") String userId,
+			@Param("userLevel") Integer userLevel);
 }
