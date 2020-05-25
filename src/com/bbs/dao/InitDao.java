@@ -1,11 +1,15 @@
 package com.bbs.dao;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
@@ -16,9 +20,23 @@ public class InitDao {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (Exception e) {e.printStackTrace();}
 	}
-	private final String URL = "jdbc:mysql://127.0.0.1:3306/bbs_system?useUnicode=true&characterEncoding=utf-8";
-	private final String USER = "root";
-	private final String PASSWORD = "root";
+	private String URL = null;
+	private String USER = null;
+	private String PASSWORD = null;
+	public InitDao() {
+		try {
+			InputStream in = InitDao.class.getClassLoader()
+					.getResourceAsStream("database.properties");
+			 Properties prop = new Properties();   
+			 prop.load(in);
+			 URL = prop.getProperty("url");
+			 USER = prop.getProperty("user");
+			 PASSWORD = prop.getProperty("password");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * 根据 levelMessage 查找对应用户列表
 	 * @param levelMessage

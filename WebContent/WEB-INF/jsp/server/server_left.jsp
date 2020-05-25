@@ -5,6 +5,8 @@
     <div class="sidebarSep"></div>
     
     <!-- Left navigation -->
+    <!--  
+    
     <ul id="menu" class="nav">
         <li class="dash"><a href="index.html" title=""><span>Dashboard</span></a></li>
         <li class="charts"><a href="charts.html" title=""><span>Statistics and charts</span></a></li>
@@ -49,4 +51,6 @@
             </ul>
         </li>
     </ul>
+    
+    -->
 </div>
