@@ -112,5 +112,10 @@ public class ServerServiceImpl implements ServerService {
 	public int updateUserLevelById(String userId, Integer userLevel) {
 		return userMapper.updateUserLevelById(userId, userLevel);
 	}
+	// 通过 userId 修改 levelDown
+	@Override
+	public int updateLevelDownById(User user) {
+		return userMapper.updateLevelDownById(user);
+	}
 
 }

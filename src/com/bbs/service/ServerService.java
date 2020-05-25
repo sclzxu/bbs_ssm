@@ -39,6 +39,8 @@ public interface ServerService {
 	List<User> findAllUsers();
 	
 	int updateUserLevelById(String userId,Integer userLevel);
+	
+	int updateLevelDownById(User user);
 }
 
 

@@ -1,5 +1,7 @@
 package com.bbs.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -228,6 +230,40 @@ public class ServerController {
 		serverService.updateUserLevelById(userId, level.getLevelId());
 		model.addAttribute("error", "提升等级成功");
 		
+		return "manage_opt_user";
+	}
+	// 暂时降级
+	@RequestMapping(value="/level_down",method=RequestMethod.POST)
+	public String levelDown(String userId,String date,Model model) {
+		// 根据 id 获取 User
+		User user = clientService.findUserById(userId);
+		model.addAttribute("user", user);
+		if(user.getUserLevel().getLevelMessage().equals("初级会员")) {
+			model.addAttribute("error", "初级会员不能降级");
+			return "manage_opt_user";
+		}
+		// 把date转换成功 Date 对象
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date levelDown = null;
+		try {
+			levelDown = sdf.parse(date);
+		} catch (Exception e) {e.printStackTrace();}
+		// 修改数据库中 user 的levelDown
+		user.setLevelDown(levelDown);
+		serverService.updateLevelDownById(user);
+		
+		return "manage_opt_user";
+	}
+	// 取消降级
+	@RequestMapping("/un_level_down")
+	public String unLevelDown(String userId,Model model) {
+		// 根据 id 获取 User
+		User user = clientService.findUserById(userId);
+		model.addAttribute("user", user);
+		Date levelDown = null;
+		user.setLevelDown(levelDown);
+		serverService.updateLevelDownById(user);
+				
 		return "manage_opt_user";
 	}
 }

@@ -37,6 +37,10 @@
 	<update id="updateUserLevelById">
 		update bbs_user set userLevel=#{userLevel} where userId=#{userId}
 	</update>
+	<!-- 通过 userId 修改 levelDown -->
+	<update id="updateLevelDownById" parameterType="User">
+		update bbs_user set levelDown=#{levelDown} where userId=#{userId}
+	</update>
 </mapper>
 
 

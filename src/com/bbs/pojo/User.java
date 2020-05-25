@@ -18,7 +18,7 @@ public class User {
 	private String userPhoto;
 	private Double userScore;
 	private Level userLevel;
-	private Date userDown;
+	private Date levelDown;
 	private Date userLock;
 	private Date userCreateDate;
 	private Integer isPass;	// 暂时不用
@@ -70,11 +70,11 @@ public class User {
 	public void setUserLevel(Level userLevel) {
 		this.userLevel = userLevel;
 	}
-	public Date getUserDown() {
-		return userDown;
+	public Date getLevelDown() {
+		return levelDown;
 	}
-	public void setUserDown(Date userDown) {
-		this.userDown = userDown;
+	public void setLevelDown(Date levelDown) {
+		this.levelDown = levelDown;
 	}
 	public Date getUserLock() {
 		return userLock;

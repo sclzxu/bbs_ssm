@@ -18,4 +18,6 @@ public interface UserMapper {
 	
 	int updateUserLevelById(@Param("userId") String userId,
 			@Param("userLevel") Integer userLevel);
+	
+	int updateLevelDownById(User user);
 }

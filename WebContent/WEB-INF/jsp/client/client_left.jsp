@@ -8,8 +8,9 @@
     <!-- Left navigation -->
     <ul id="menu" class="nav">
     	<c:forEach items="${plates}" var="plate">
-        <li class="tables"><a href="#" title="" class="exp"><span>${plate.plateTitle}</span><strong>${plates.size() }</strong></a>
+        <li class="tables"><a href="#" title="" class="exp"><span>${plate.plateTitle}</span><strong>${plates.size()+1 }</strong></a>
             <ul class="sub">
+            	<li><li><a href="#?plateId=${plate.plateId}&categoryId=0" title="">全部</a></li></li>
             	<c:forEach items="${categories }" var="ctg">
             		<li><a href="#?plateId=${plate.plateId}&categoryId=${ctg.categoryId}" title="">${ctg.category}</a></li>
             	</c:forEach>
