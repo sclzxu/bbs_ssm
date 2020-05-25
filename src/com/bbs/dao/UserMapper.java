@@ -1,5 +1,7 @@
 package com.bbs.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.bbs.pojo.User;
@@ -11,4 +13,6 @@ public interface UserMapper {
 	User findUserById(String userId);
 	
 	int addNewUser(User user);
+	
+	List<User> findAllUsers();
 }

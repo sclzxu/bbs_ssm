@@ -21,7 +21,7 @@ public class User {
 	private Date userDown;
 	private Date userLock;
 	private Date userCreateDate;
-	private Integer isPass;
+	private Integer isPass;	// 暂时不用
 	public String getUserId() {
 		return userId;
 	}

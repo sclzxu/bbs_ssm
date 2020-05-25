@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.bbs.dao.CategoryMapper;
 import com.bbs.dao.InvitationMapper;
 import com.bbs.dao.PlateMapper;
+import com.bbs.dao.UserMapper;
 import com.bbs.pojo.Category;
 import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Plate;
+import com.bbs.pojo.User;
 import com.bbs.service.ServerService;
 
 @Service("serverService")
@@ -22,6 +24,8 @@ public class ServerServiceImpl implements ServerService {
 	private CategoryMapper categoryMapper;
 	@Resource
 	private InvitationMapper invitationMapper;
+	@Resource
+	private UserMapper userMapper;
 	// 根据板块名称查找对应板块
 	@Override
 	public Plate findPlateByTitle(String plateTitle) {
@@ -97,6 +101,11 @@ public class ServerServiceImpl implements ServerService {
 	@Override
 	public List<Invitation> findAllInvitationByCategoryId(Integer categoryId) {
 		return invitationMapper.findAllInvitationByCategoryId(categoryId);
+	}
+	// 查询所有用户
+	@Override
+	public List<User> findAllUsers() {
+		return userMapper.findAllUsers();
 	}
 
 }

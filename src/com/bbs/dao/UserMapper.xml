@@ -28,6 +28,11 @@
 			values(#{userId},#{userPsw},#{userAlice},#{userEmail},
 			#{userSex},#{userLevel.levelId},#{userCreateDate})
 	</insert>
+	<!-- 查询所有用户 -->
+	<select id="findAllUsers" resultMap="userMap">
+		select * from bbs_user left join bbs_level
+			on bbs_user.userLevel=bbs_level.levelId 
+	</select>
 </mapper>
 
 

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.bbs.pojo.Category;
 import com.bbs.pojo.Plate;
+import com.bbs.pojo.User;
+import com.bbs.service.ClientService;
 import com.bbs.service.ServerService;
 
 @Controller
@@ -26,6 +28,8 @@ import com.bbs.service.ServerService;
 public class ServerController {
 	@Resource
 	private ServerService serverService;
+	@Resource
+	private ClientService clientService;
 	// 访问 manage.jsp 页面
 	@RequestMapping(value="/manage",method=RequestMethod.GET)
 	public String manage() {
@@ -168,6 +172,22 @@ public class ServerController {
 	public String delCategory(@PathVariable Integer categoryId) {
 		serverService.delCategoryById(categoryId);
 		return "redirect:/server/manage_category";
+	}
+	// 跳转到 manage_user 页面
+	@RequestMapping(value="/manage_user",method=RequestMethod.GET)
+	public String manageUser(Model model) {
+		// 获取所有的用户（包含等级信息）
+		List<User> users = serverService.findAllUsers();
+		model.addAttribute("users", users);
+		return "manage_user";
+	}
+	// 跳转到 manage_view_user
+	@RequestMapping(value="/manage_view_user/{userId}",method=RequestMethod.GET)
+	public String mangeViewUser(@PathVariable String userId,Model model) {
+		// 根据 userId 获取 User
+		User user = clientService.findUserById(userId);
+		model.addAttribute("user", user);
+		return "manage_view_user";
 	}
 }
 

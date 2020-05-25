@@ -5,6 +5,7 @@ import java.util.List;
 import com.bbs.pojo.Category;
 import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Plate;
+import com.bbs.pojo.User;
 
 public interface ServerService {
 	Plate findPlateByTitle(String plateTitle);
@@ -34,6 +35,8 @@ public interface ServerService {
 	int delCategoryById(Integer categoryId);
 	
 	List<Invitation> findAllInvitationByCategoryId(Integer categoryId);
+	
+	List<User> findAllUsers();
 }
 
 
