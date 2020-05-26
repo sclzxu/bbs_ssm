@@ -11,4 +11,8 @@ public interface ClientService {
 	int addNewUser(User user);
 	
 	int updateUserPswById(User user);
+	
+	int updateUserById(User user);
+	
+	int updateUserPhotoById(String userId,String userPhoto);
 }

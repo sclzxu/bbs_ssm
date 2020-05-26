@@ -49,6 +49,15 @@
 	<update id="updateUserPswById" parameterType="User">
 		update bbs_user set userPsw=#{userPsw} where userId=#{userId}
 	</update>
+	<!-- 通过 userId 修改 usrAlice、userSex和userEmail -->
+	<update id="updateUserById" parameterType="User">
+		update bbs_user set userAlice=#{userAlice},userSex=#{userSex},
+			userEmail=#{userEmail} where userId=#{userId}
+	</update>
+	<!-- 根据 userId 修改 userPhoto -->
+	<update id="updateUserPhotoById">
+		update bbs_user set userPhoto=#{userPhoto} where userId=#{userId}
+	</update>
 </mapper>
 
 

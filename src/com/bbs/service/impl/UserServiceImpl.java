@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 		// 对密码加密处理
 		User result = userMapper.findUserByIdAndPsw(userId, DigestUtils.md5Hex(userPsw));
 		// 判断用户是否被降级处理
-		if(result.getLevelDown()!=null 
+		if(result!=null && result.getLevelDown()!=null 
 				&& result.getLevelDown().getTime()>new Date().getTime()) {
 			String[] levels = {"初级会员","中级会员","高级会员"};
 			int index = 0;

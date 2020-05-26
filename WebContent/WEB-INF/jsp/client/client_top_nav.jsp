@@ -3,7 +3,7 @@
 <div class="topNav">
         <div class="wrapper">
         	<c:if test="${!empty loginer}">
-        		<div class="welcome"><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/userPic.png" alt="" /></a><span>您好, ${loginer.userAlice }</span></div>
+        		<div class="welcome"><a href="#" title=""><img style="width: 16px;" src="${pageContext.request.contextPath}/statics/file/${loginer.userPhoto}" alt="" /></a><span>您好, ${loginer.userAlice }</span></div>
         	</c:if>
             <div class="userNav">
                 <ul>
@@ -17,7 +17,7 @@
                         <ul class="userDropdown">
                             <li><a href="#" title="" class="sAdd">贴子管理</a></li>
                             <li><a href="${pageContext.request.contextPath}/client/client_view_user" title="" class="sInbox">个人信息</a></li>
-                            <li><a href="#" title="" class="sOutbox">用户设置</a></li>
+                            <li><a href="${pageContext.request.contextPath}/client/client_alter_user" title="" class="sOutbox">用户设置</a></li>
                             <li><a href="${pageContext.request.contextPath}/client/client_alter_password" title="" class="sTrash">密码修改</a></li>
                         </ul>
                     	</li>

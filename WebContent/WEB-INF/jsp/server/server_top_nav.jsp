@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <div class="topNav">
         <div class="wrapper">
-            <div class="welcome"><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/userPic.png" alt="" /></a><span>您好，${loginer.userAlice }</span></div>
+            <div class="welcome"><a href="#" title=""><img style="width: 16px;" src="${pageContext.request.contextPath}/statics/file/${loginer.userPhoto}" alt="" /></a><span>您好，${loginer.userAlice }</span></div>
             <div class="userNav">
                 <ul>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/tasks.png" alt="" /><span>Tasks</span></a></li>

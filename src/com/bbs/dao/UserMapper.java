@@ -24,4 +24,9 @@ public interface UserMapper {
 	int updateUserLockById(User user);
 	
 	int updateUserPswById(User user);
+	
+	int updateUserById(User user);
+	
+	int updateUserPhotoById(@Param("userId") String userId,
+			@Param("userPhoto") String userPhoto);
 }

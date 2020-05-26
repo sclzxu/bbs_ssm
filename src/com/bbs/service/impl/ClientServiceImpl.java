@@ -41,6 +41,16 @@ public class ClientServiceImpl implements ClientService {
 		user.setUserPsw(DigestUtils.md5Hex(user.getUserPsw()));
 		return userMapper.updateUserPswById(user);
 	}
+	// 通过 userId 修改 usrAlice、userSex和userEmail 
+	@Override
+	public int updateUserById(User user) {
+		return userMapper.updateUserById(user);
+	}
+	// 根据 userId 修改 userPhoto
+	@Override
+	public int updateUserPhotoById(String userId, String userPhoto) {
+		return userMapper.updateUserPhotoById(userId, userPhoto);
+	}
 
 }
 
