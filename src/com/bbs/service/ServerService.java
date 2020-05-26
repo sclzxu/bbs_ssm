@@ -41,6 +41,8 @@ public interface ServerService {
 	int updateUserLevelById(String userId,Integer userLevel);
 	
 	int updateLevelDownById(User user);
+	
+	int updateUserLockById(User user);
 }
 
 

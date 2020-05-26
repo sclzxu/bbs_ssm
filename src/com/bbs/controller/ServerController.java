@@ -266,6 +266,36 @@ public class ServerController {
 				
 		return "manage_opt_user";
 	}
+	// 锁定账户
+	@RequestMapping(value="/lock_user",method=RequestMethod.POST)
+	public String lockUser(String userId,String date,Model model) {
+		// 根据 id 获取 User
+		User user = clientService.findUserById(userId);
+		model.addAttribute("user", user);
+		// 把date转换成功 Date 对象
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date userLock = null;
+		try {
+			userLock = sdf.parse(date);
+		} catch (Exception e) {e.printStackTrace();}
+		user.setUserLock(userLock);
+		// 修改数据库中 bbs_user 表的 userLock 值
+		serverService.updateUserLockById(user);
+		
+		return "manage_opt_user";
+	}
+	// 解除锁定
+	@RequestMapping("/un_user_lock")
+	public String unUserLock(String userId,Model model) {
+		// 根据 id 获取 User
+		User user = clientService.findUserById(userId);
+		model.addAttribute("user", user);
+		Date userLock = null;
+		user.setUserLock(userLock);
+		serverService.updateUserLockById(user);
+					
+		return "manage_opt_user";
+	}
 }
 
 

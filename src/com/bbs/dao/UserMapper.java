@@ -20,4 +20,6 @@ public interface UserMapper {
 			@Param("userLevel") Integer userLevel);
 	
 	int updateLevelDownById(User user);
+	
+	int updateUserLockById(User user);
 }

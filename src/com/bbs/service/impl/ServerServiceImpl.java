@@ -117,5 +117,10 @@ public class ServerServiceImpl implements ServerService {
 	public int updateLevelDownById(User user) {
 		return userMapper.updateLevelDownById(user);
 	}
+	// 通过 userId 修改 userLock
+	@Override
+	public int updateUserLockById(User user) {
+		return userMapper.updateUserLockById(user);
+	}
 
 }

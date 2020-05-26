@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@page import="java.util.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <% long date = new Date().getTime(); request.setAttribute("now",date); %>
 <!DOCTYPE html>
 <html>
@@ -178,6 +179,7 @@
 								<c:choose>
 									<c:when test="${user.levelDown!=null && user.levelDown.getTime()>now }">
 										<div class="oneFour">
+											<span style="color: red;">降级日期至:<fmt:formatDate value="${user.levelDown }" pattern="yyyy年MM月dd日"/></span><br/>
 											<a id="levelCover" href="${pageContext.request.contextPath}/server/un_level_down?userId=${user.userId}" title=""
 												class="wContentButton redwB">取消降级</a>
 										</div>
@@ -196,7 +198,7 @@
 					</div>
 				</fieldset>
 			</form>
-			<form action="" method="post" id="lockForm">
+			<form action="${pageContext.request.contextPath}/server/lock_user" method="post" id="lockForm">
 				<input type="hidden" name="userId" value="${user.userId}"/>
 				<input type="hidden" name="date" id="lockDate"/>
 				<fieldset>
@@ -204,10 +206,20 @@
 						<div class="formRow">
 							<label>锁定账户:</label>
 							<div class="formRight">
-								<div class="datepickerInline"></div>
-								<div class="oneFour">
-									<a href="#" title="" class="wContentButton redwB">锁定账户</a>
-								</div>
+								<c:choose>
+									<c:when test="${user.userLock!=null && user.userLock.getTime()>now }">
+										<div class="oneFour">
+											<span style="color: red;">锁定日期至:<fmt:formatDate value="${user.userLock }" pattern="yyyy年MM月dd日"/></span><br/>
+											<a href="${pageContext.request.contextPath}/server/un_user_lock?userId=${user.userId}" title="" class="wContentButton redwB">解除锁定</a>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="datepickerInline"></div>
+										<div class="oneFour">
+											<a id="lockUser" href="#" title="" class="wContentButton redwB">锁定账户</a>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -238,6 +250,19 @@ $(function(){
 		$("#downDate").val($date);
 		// 提交表单
 		$("#pauseForm").submit();
+	});
+	// 锁定账户
+	$("#lockUser").click(function(event){
+		event.preventDefault();	// 禁止超链接默认行为
+		// 获取禁止的日期日期时间
+		var $obj = $(this).parent().siblings().find(".ui-state-active").eq(0);
+		var $date = $obj.parent().attr("data-year")
+					+ '-' + $obj.parent().attr("data-month")
+					+ '-' + $obj.html();
+		// 把 $date设置给id为downDate的标签
+		$("#lockDate").val($date);
+		// 提交表单
+		$("#lockForm").submit();
 	});
 });
 </script>

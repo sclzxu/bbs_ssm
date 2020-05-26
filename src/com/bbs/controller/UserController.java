@@ -1,5 +1,7 @@
 package com.bbs.controller;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -35,6 +37,12 @@ public class UserController {
 		// 没有找到
 		if(null == result) {
 			model.addAttribute("error","账户或密码错误");
+			return "login";
+		}
+		// 判断账户是否被锁定
+		if(result.getUserLock()!=null 
+				&& result.getUserLock().getTime() > new Date().getTime()) {
+			model.addAttribute("error","账户被锁定");
 			return "login";
 		}
 		// 把账户放入 session
