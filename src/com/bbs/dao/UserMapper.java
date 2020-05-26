@@ -22,4 +22,6 @@ public interface UserMapper {
 	int updateLevelDownById(User user);
 	
 	int updateUserLockById(User user);
+	
+	int updateUserPswById(User user);
 }

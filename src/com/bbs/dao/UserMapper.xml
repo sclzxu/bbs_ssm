@@ -45,6 +45,10 @@
 	<update id="updateUserLockById" parameterType="User">
 		update bbs_user set userLock=#{userLock} where userId=#{userId}
 	</update>
+	<!-- 通过 userId 修改 userPsw -->
+	<update id="updateUserPswById" parameterType="User">
+		update bbs_user set userPsw=#{userPsw} where userId=#{userId}
+	</update>
 </mapper>
 
 

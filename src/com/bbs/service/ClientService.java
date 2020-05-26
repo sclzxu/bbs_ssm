@@ -9,4 +9,6 @@ public interface ClientService {
 	Level findLevelByMessage(String levelMessage);
 	
 	int addNewUser(User user);
+	
+	int updateUserPswById(User user);
 }

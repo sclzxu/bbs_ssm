@@ -7,19 +7,21 @@
         	</c:if>
             <div class="userNav">
                 <ul>
+                	<li><a href="${pageContext.request.contextPath}/" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/tasks.png" alt="" /><span>首页</span></a></li>
                 	<c:if test="${empty loginer }">
                 		<li><a href="${pageContext.request.contextPath}/client/client_regist" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/profile.png" alt="" /><span>注册</span></a></li>
                 	</c:if>
-                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/tasks.png" alt="" /><span>Tasks</span></a></li>
-                    <li class="dd"><a title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/messages.png" alt="" /><span>Messages</span><span class="numberTop">8</span></a>
+                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/messages.png" alt="" /><span>Settings</span></a></li>
+                    <c:if test="${!empty loginer }">
+                    	<li class="dd"><a title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/settings.png" alt="" /><span>个人中心</span></a>
                         <ul class="userDropdown">
-                            <li><a href="#" title="" class="sAdd">new message</a></li>
-                            <li><a href="#" title="" class="sInbox">inbox</a></li>
-                            <li><a href="#" title="" class="sOutbox">outbox</a></li>
-                            <li><a href="#" title="" class="sTrash">trash</a></li>
+                            <li><a href="#" title="" class="sAdd">贴子管理</a></li>
+                            <li><a href="${pageContext.request.contextPath}/client/client_view_user" title="" class="sInbox">个人信息</a></li>
+                            <li><a href="#" title="" class="sOutbox">用户设置</a></li>
+                            <li><a href="${pageContext.request.contextPath}/client/client_alter_password" title="" class="sTrash">密码修改</a></li>
                         </ul>
-                    </li>
-                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/settings.png" alt="" /><span>Settings</span></a></li>
+                    	</li>
+                    </c:if>
                     <c:choose>
                     	<c:when test="${empty loginer }">
                     		<li><a href="${pageContext.request.contextPath}/login" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/logout.png" alt="" /><span>登录</span></a></li>

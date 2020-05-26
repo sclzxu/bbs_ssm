@@ -34,6 +34,13 @@ public class ClientServiceImpl implements ClientService {
 		user.setUserPsw(DigestUtils.md5Hex(user.getUserPsw()));
 		return userMapper.addNewUser(user);
 	}
+	// 通过 userId 修改用户密码
+	@Override
+	public int updateUserPswById(User user) {
+		// 加密密码
+		user.setUserPsw(DigestUtils.md5Hex(user.getUserPsw()));
+		return userMapper.updateUserPswById(user);
+	}
 
 }
 
