@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>首页</title>
+<title>贴子审核</title>
 <link href="${pageContext.request.contextPath}/statics/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
@@ -62,43 +62,49 @@
 <!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  --></head>
 
 <body>
+
 <!-- Left side content -->
-<%@ include file="client/client_left.jsp" %>
+<%@ include file="server/server_left.jsp" %>
 
 <!-- Right side -->
 <div id="rightSide">
 
     <!-- Top fixed navigation -->
-    <%@ include file="client/client_top_nav.jsp" %>
+    <%@ include file="server/server_top_nav.jsp" %>
     
     <!-- Responsive header -->
-    <%@ include file="client/client_header.jsp" %>
+    <%@ include file="server/server_header.jsp" %>
     
     <div class="line"></div>
     
     <!-- Main content wrapper -->
     <div class="wrapper">
-        <!-- Dynamic table -->
+    	<!-- Dynamic table -->
         <div class="widget">
-            <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/full2.png" alt="" class="titleIcon" /><h6>贴子</h6></div>                          
+            <div class="title"><img src="images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>未审核贴子</h6></div>                          
             <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
             <thead>
             <tr>
-            <th>发帖日期</th>
+            <th>日期</th>
             <th>标题</th>
-            <th>发帖者</th>
-            <th>板块</th>
-            <th>分类</th>
+            <th>用户ID</th>
+            <th>审核操作</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${invitations}" var="inv">
             	<tr class="gradeC">
-            	<td><fmt:formatDate value="${inv.invitationCreate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-            	<td>${inv.invitationTitle}</td>
-            	<td>${inv.user.userAlice}</td>
-            	<td>${inv.plate.plateTitle}</td>
-            	<td class="center">${inv.category.category}</td>
+            		<c:choose>
+            			<c:when test="${empty inv.invitationModify}">
+            				<td><fmt:formatDate value="${inv.invitationCreate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            			</c:when>
+            			<c:otherwise>
+            				<td><fmt:formatDate value="${inv.invitationModify}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            			</c:otherwise>
+            		</c:choose>
+            		<td>${inv.invitationTitle}</td>
+            		<td class="center">${inv.user.userId}</td>
+            		<td class="center"><a href="/${inv.invitationId}">审核</a></td>
             	</tr>
             </c:forEach>
             </tbody>
@@ -107,17 +113,13 @@
     </div>
     
     <!-- Footer line -->
-    <%@ include file="client/client_footer.jsp" %>
+    <%@ include file="server/server_footer.jsp" %>
 
 </div>
 
 <div class="clear"></div>
-<script>
-$(function(){
-	// 触发点击 “<th>发帖日期</th>” 单击事件
-	$(".dTable").find("th").first().trigger("click");
-});
-</script>
+
 </body>
 </html>
+
     

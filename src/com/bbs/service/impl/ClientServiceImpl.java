@@ -78,8 +78,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 	// 查询出所有的贴子
 	@Override
-	public List<Invitation> findAllInvitations() {
-		List<Invitation> invitations = invitationMapper.findAllInvitations();
+	public List<Invitation> findAllInvitations(Integer isPass) {
+		List<Invitation> invitations = invitationMapper.findAllInvitations(isPass);
 		String title = null;
 		String meg = null;
 		for(Invitation inv : invitations) {

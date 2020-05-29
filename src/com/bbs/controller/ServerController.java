@@ -296,6 +296,13 @@ public class ServerController {
 					
 		return "manage_opt_user";
 	}
+	// 跳转到  manage_invitation 
+	@RequestMapping(value="/manage_invitation",method=RequestMethod.GET)
+	public String manageInvitation(Model model) {
+		// 得到所有待审核的贴子
+		model.addAttribute("invitations",clientService.findAllInvitations(0));
+		return "manage_invitation";
+	}
 }
 
 

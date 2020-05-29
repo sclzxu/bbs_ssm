@@ -21,5 +21,5 @@ public interface ClientService {
 	
 	int addNewInvitation(Invitation invitation);
 	
-	List<Invitation> findAllInvitations();
+	List<Invitation> findAllInvitations(Integer isPass);
 }

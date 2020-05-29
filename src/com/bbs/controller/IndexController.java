@@ -16,7 +16,7 @@ public class IndexController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		// 获取所有的贴子信息
-		model.addAttribute("invitations",clientService.findAllInvitations());
+		model.addAttribute("invitations",clientService.findAllInvitations(1));
 		return "index";
 	}
 }

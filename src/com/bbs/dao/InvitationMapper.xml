@@ -29,16 +29,17 @@
 			#{user.userId},#{plate.plateId},#{category.categoryId},#{invitationCreate})
 	</insert>
 	<!-- 获取所有的贴子 -->
-	<select id="findAllInvitations" resultMap="invitationMap">
+	<select id="findAllInvitations" parameterType="int" resultMap="invitationMap">
 		select invitationId,invitationTitle,invitationMessage,bbs_invitation.userId,
 			bbs_invitation.plateId,bbs_invitation.categoryId,
 			bbs_invitation.isPass invitationIsPass,
-			bbs_invitation.isEnable invitationIsEnable,plateTitle,
+			bbs_invitation.isEnable invitationIsEnable,
 			invitationCreate,invitationModify,plateTitle,userAlice,category
 			from bbs_invitation left join bbs_user 
 			on bbs_invitation.userId=bbs_user.userId
 			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
 			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+			where bbs_invitation.isPass=#{isPass}
 	</select>
 </mapper>
 
