@@ -9,9 +9,9 @@
                 <ul>
                 	<li><a href="${pageContext.request.contextPath}/" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/tasks.png" alt="" /><span>首页</span></a></li>
                 	<c:if test="${empty loginer }">
-                		<li><a href="${pageContext.request.contextPath}/client/client_regist" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/profile.png" alt="" /><span>注册</span></a></li>
+                		<li><a href="${pageContext.request.contextPath}/regist" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/profile.png" alt="" /><span>注册</span></a></li>
                 	</c:if>
-                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/messages.png" alt="" /><span>Settings</span></a></li>
+                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/messages.png" alt="" /><span>发帖</span></a></li>
                     <c:if test="${!empty loginer }">
                     	<li class="dd"><a title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/settings.png" alt="" /><span>个人中心</span></a>
                         <ul class="userDropdown">

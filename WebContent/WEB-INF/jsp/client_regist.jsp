@@ -89,7 +89,7 @@
         </div>
         <!-- Validation form -->
         <form:form cssClass="form" method="post" modelAttribute="user"
-        	action="${pageContext.request.contextPath}/client/client_regist">
+        	action="${pageContext.request.contextPath}/regist">
         	<fieldset>
                 <div class="widget">
                     <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>账户注册</h6></div>

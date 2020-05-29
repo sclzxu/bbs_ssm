@@ -67,6 +67,11 @@
     		<mvc:mapping path="/client/**"/>
     		<bean class="com.bbs.interceptor.ClientLeftInterceptor"/>
     	</mvc:interceptor>
+    	<!-- 用户登录后才能使用前端用户功能 -->
+    	<mvc:interceptor>
+    		<mvc:mapping path="/client/**"/>
+    		<bean class="com.bbs.interceptor.ClientInterceptor"/>
+    	</mvc:interceptor>
     </mvc:interceptors>
 </beans>
 

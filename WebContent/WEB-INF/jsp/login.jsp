@@ -67,7 +67,7 @@
     <div class="wrapper">
         <div class="userNav">
             <ul>
-                <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/mainWebsite.png" alt="" /><span>Main website</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/mainWebsite.png" alt="" /><span>首页</span></a></li>
                 <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/profile.png" alt="" /><span>Contact admin</span></a></li>
                 <li><a href="#" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/messages.png" alt="" /><span>Support</span></a></li>
                 <li><a href="login.html" title=""><img src="${pageContext.request.contextPath}/statics/image/icons/topnav/settings.png" alt="" /><span>Settings</span></a></li>

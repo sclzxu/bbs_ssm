@@ -6,7 +6,7 @@
   </welcome-file-list>
   
   <session-config>
-	<session-timeout>20000</session-timeout>
+	<session-timeout>60</session-timeout>
   </session-config>
   
   <context-param>
