@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.bbs.pojo.Invitation;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
+import com.bbs.service.ServerService;
 import com.mysql.jdbc.StringUtils;
 
 @Controller
@@ -31,6 +33,8 @@ import com.mysql.jdbc.StringUtils;
 public class ClientController {
 	@Resource
 	private ClientService clientService;
+	@Resource
+	private ServerService serverService;
 	// 跳转到 client_view_user 页面
 	@RequestMapping("/client_view_user")
 	public String clientViewUser() {
@@ -112,7 +116,7 @@ public class ClientController {
             }else if(prefix.equalsIgnoreCase("jpg") || prefix.equalsIgnoreCase("png") 
             		|| prefix.equalsIgnoreCase("gif")){//上传图片格式不正确
             	Random random = new Random();
-            	fileName = userId+new Date().getTime()+random.nextInt(10)+"."+prefix;
+            	fileName = userId+new Date().getTime()+random.nextInt(100)+"."+prefix;
                 File targetFile = new File(path,fileName);
                 try {  
                 	photo.transferTo(targetFile);  //上传文件
@@ -132,6 +136,38 @@ public class ClientController {
 		status.put("filename", fileName);
 		
 		return JSON.toJSONString(status);
+	}
+	// 跳转到 client_send_invitation 页面
+	@RequestMapping(value="client_send_invitation",method=RequestMethod.GET)
+	public String clientSendInvitation(Model model) {
+		return "client_send_invitation";
+	}
+	// 实现发帖功能
+	@RequestMapping(value="client_send_invitation",method=RequestMethod.POST)
+	public String clientSendInvitation(Invitation invitation,HttpSession session,
+			Model model) {
+		if(StringUtils.isNullOrEmpty(invitation.getInvitationTitle())
+				|| StringUtils.isNullOrEmpty(invitation.getInvitationMessage())) {
+			model.addAttribute("error","贴子标题和内容都不能为空");
+			return "client_send_invitation";
+		}
+		if(invitation.getPlate().getPlateId() == 0) {
+			model.addAttribute("error","板块信息没有选择");
+			return "client_send_invitation";
+		}
+		if(invitation.getCategory().getCategoryId()== 0) {
+			model.addAttribute("error","分类信息没有选择");
+			return "client_send_invitation";
+		}
+		// 把 invitation 添加到数据库中
+		User loginer = (User)session.getAttribute("loginer");
+		invitation.setInvitationId(loginer.getUserId()+new Date().getTime());
+		invitation.setInvitationCreate(new Date());
+		invitation.setUser(loginer);
+		clientService.addNewInvitation(invitation);
+		model.addAttribute("error", "发帖成功");
+		
+		return "client_send_invitation";
 	}
 }
 

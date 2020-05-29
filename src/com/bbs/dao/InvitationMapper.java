@@ -6,4 +6,6 @@ import com.bbs.pojo.Invitation;
 
 public interface InvitationMapper {
 	List<Invitation> findAllInvitationByCategoryId(Integer categoryId);
+	
+	int addNewInvitation(Invitation invitation);
 }

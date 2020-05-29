@@ -11,7 +11,6 @@ public class Invitation {
 	private Category category;
 	private Integer isPass;
 	private Integer isEnable;
-	private Integer isCream;
 	private Date invitationCreate;
 	private Date invitationModify;
 	public String getInvitationId() {
@@ -61,12 +60,6 @@ public class Invitation {
 	}
 	public void setIsEnable(Integer isEnable) {
 		this.isEnable = isEnable;
-	}
-	public Integer getIsCream() {
-		return isCream;
-	}
-	public void setIsCream(Integer isCream) {
-		this.isCream = isCream;
 	}
 	public Date getInvitationCreate() {
 		return invitationCreate;

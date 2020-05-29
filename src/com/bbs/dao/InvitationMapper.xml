@@ -7,6 +7,13 @@
 	<select id="findAllInvitationByCategoryId" resultType="Invitation">
 		select * from bbs_invitation where categoryId=#{categoryId}
 	</select>
+	<!-- 添加新的贴子 -->
+	<insert id="addNewInvitation" parameterType="Invitation">
+		insert into bbs_invitation(invitationId,invitationTitle,invitationMessage,userId,
+			plateId,categoryId,invitationCreate) 
+			values(#{invitationId},#{invitationTitle},#{invitationMessage},
+			#{user.userId},#{plate.plateId},#{category.categoryId},#{invitationCreate})
+	</insert>
 </mapper>
 
 

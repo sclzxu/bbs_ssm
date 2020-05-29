@@ -1,5 +1,6 @@
 package com.bbs.service;
 
+import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 
@@ -15,4 +16,6 @@ public interface ClientService {
 	int updateUserById(User user);
 	
 	int updateUserPhotoById(String userId,String userPhoto);
+	
+	int addNewInvitation(Invitation invitation);
 }

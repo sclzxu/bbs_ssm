@@ -5,8 +5,10 @@ import javax.annotation.Resource;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
+import com.bbs.dao.InvitationMapper;
 import com.bbs.dao.LevelMapper;
 import com.bbs.dao.UserMapper;
+import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
@@ -17,6 +19,8 @@ public class ClientServiceImpl implements ClientService {
 	private UserMapper userMapper;
 	@Resource
 	private LevelMapper levelMapper;
+	@Resource
+	private InvitationMapper invitationMapper;
 	// 根据 userId 查找用户
 	@Override
 	public User findUserById(String userId) {
@@ -50,6 +54,11 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public int updateUserPhotoById(String userId, String userPhoto) {
 		return userMapper.updateUserPhotoById(userId, userPhoto);
+	}
+	// 添加新的贴子
+	@Override
+	public int addNewInvitation(Invitation invitation) {
+		return invitationMapper.addNewInvitation(invitation);
 	}
 
 }
