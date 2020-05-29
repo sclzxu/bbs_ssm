@@ -3,6 +3,20 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bbs.dao.InvitationMapper">
+	<resultMap type="Invitation" id="invitationMap">
+		<id property="invitationId" column="invitationId"/>
+		<result property="isPass" column="invitationIsPass"/>
+		<result property="isEnable" column="invitationIsEnable"/>
+		<association property="user" javaType="User">
+			<id property="userId" column="userId"/>
+		</association>
+		<association property="plate" javaType="Plate">
+			<id property="plateId" column="plateId"/>
+		</association>
+		<association property="category" javaType="Category">
+			<id property="categoryId" column="categoryId"/>
+		</association>
+	</resultMap>
 	<!-- 根据分类 id 查找对应的所有的贴子列表 -->
 	<select id="findAllInvitationByCategoryId" resultType="Invitation">
 		select * from bbs_invitation where categoryId=#{categoryId}
@@ -14,6 +28,18 @@
 			values(#{invitationId},#{invitationTitle},#{invitationMessage},
 			#{user.userId},#{plate.plateId},#{category.categoryId},#{invitationCreate})
 	</insert>
+	<!-- 获取所有的贴子 -->
+	<select id="findAllInvitations" resultMap="invitationMap">
+		select invitationId,invitationTitle,invitationMessage,bbs_invitation.userId,
+			bbs_invitation.plateId,bbs_invitation.categoryId,
+			bbs_invitation.isPass invitationIsPass,
+			bbs_invitation.isEnable invitationIsEnable,plateTitle,
+			invitationCreate,invitationModify,plateTitle,userAlice,category
+			from bbs_invitation left join bbs_user 
+			on bbs_invitation.userId=bbs_user.userId
+			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
+			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+	</select>
 </mapper>
 
 

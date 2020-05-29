@@ -1,7 +1,9 @@
 package com.bbs.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -66,7 +68,7 @@ public class ClientServiceImpl implements ClientService {
 		String meg = null;
 		try {
 			title = URLEncoder.encode(invitation.getInvitationTitle(),"utf-8");
-			meg = URLEncoder.encode(invitation.getInvitationMessage(), "UTF-8");
+			meg = URLEncoder.encode(invitation.getInvitationMessage(), "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -74,7 +76,28 @@ public class ClientServiceImpl implements ClientService {
 		invitation.setInvitationMessage(meg);
 		return invitationMapper.addNewInvitation(invitation);
 	}
-
+	// 查询出所有的贴子
+	@Override
+	public List<Invitation> findAllInvitations() {
+		List<Invitation> invitations = invitationMapper.findAllInvitations();
+		String title = null;
+		String meg = null;
+		for(Invitation inv : invitations) {
+			try {
+				// 对内容进行解码处理(采用UTF-8编码格式)
+				title = URLDecoder.decode(inv.getInvitationTitle(),"utf-8");
+				meg = URLDecoder.decode(inv.getInvitationMessage(),"utf-8");
+				// 屏蔽掉敏感内容
+				meg = meg.replaceAll("(共产党)|(操)","*");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			inv.setInvitationTitle(title);
+			inv.setInvitationMessage(meg);
+		}
+		return invitations;
+	}
+	
 }
 
 

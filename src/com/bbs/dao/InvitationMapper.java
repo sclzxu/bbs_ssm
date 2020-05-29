@@ -8,4 +8,6 @@ public interface InvitationMapper {
 	List<Invitation> findAllInvitationByCategoryId(Integer categoryId);
 	
 	int addNewInvitation(Invitation invitation);
+	
+	List<Invitation> findAllInvitations();
 }
