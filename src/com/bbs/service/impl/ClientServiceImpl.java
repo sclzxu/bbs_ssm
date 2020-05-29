@@ -1,5 +1,8 @@
 package com.bbs.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -58,6 +61,17 @@ public class ClientServiceImpl implements ClientService {
 	// 添加新的贴子
 	@Override
 	public int addNewInvitation(Invitation invitation) {
+		// 对内容进行编码处理(采用UTF-8编码格式)
+		String title = null;
+		String meg = null;
+		try {
+			title = URLEncoder.encode(invitation.getInvitationTitle(),"utf-8");
+			meg = URLEncoder.encode(invitation.getInvitationMessage(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		invitation.setInvitationTitle(title);
+		invitation.setInvitationMessage(meg);
 		return invitationMapper.addNewInvitation(invitation);
 	}
 
