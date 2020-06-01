@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>贴子审核</title>
+<title>审核贴子</title>
 <link href="${pageContext.request.contextPath}/statics/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
@@ -79,37 +80,59 @@
     
     <!-- Main content wrapper -->
     <div class="wrapper">
-    	<!-- Dynamic table -->
-        <div class="widget">
-            <div class="title"><img src="images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>未审核贴子</h6></div>                          
-            <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
-            <thead>
-            <tr>
-            <th>日期</th>
-            <th>标题</th>
-            <th>用户ID</th>
-            <th>审核操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${invitations}" var="inv">
-            	<tr class="gradeC">
-            		<c:choose>
-            			<c:when test="${empty inv.invitationModify}">
-            				<td><fmt:formatDate value="${inv.invitationCreate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-            			</c:when>
-            			<c:otherwise>
-            				<td><fmt:formatDate value="${inv.invitationModify}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-            			</c:otherwise>
-            		</c:choose>
-            		<td>${inv.invitationTitle}</td>
-            		<td class="center">${inv.user.userId}</td>
-            		<td class="center"><a href="${pageContext.request.contextPath}/server/manage_view_invitation/${inv.invitationId}">审核</a></td>
-            	</tr>
-            </c:forEach>
-            </tbody>
-            </table>  
-        </div>
+    	<!-- Validation form -->
+    	<form action="" class="form">
+        	<fieldset>
+                <div class="widget">
+                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>审核贴子</h6></div>
+                    <div class="formRow">
+                    	<label for="userId">用户ID</label>
+                        <div class="formRight">
+                        	<input id="userId" type="text" readonly="readonly" value="${invitation.user.userId}"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<label for="date">日期</label>
+                        <div class="formRight">
+                        	<c:choose>
+            					<c:when test="${empty invitation.invitationModify}">
+            						<td><fmt:formatDate value="${invitation.invitationCreate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            					</c:when>
+            					<c:otherwise>
+            						<td><fmt:formatDate value="${invitation.invitationModify}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            					</c:otherwise>
+            				</c:choose>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<label for="title">标题</label>
+                        <div class="formRight">
+                        	<input id="title" type="text" readonly="readonly" value="${invitation.invitationTitle}"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<label>内容</label>
+                        <div class="formRight">
+                        	${invitation.invitationMessage}
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                    	<label>审核</label>
+                        <div class="formRight">
+                        	<div class="oneTwo"><a href="${pageContext.request.contextPath}/server/manage_invitation_pass?invitationId=${invitation.invitationId}&isPass=1" class="wContentButton greenwB">通过</a></div>
+ 							<div class="oneTwo"><a href="${pageContext.request.contextPath}/server/manage_invitation_pass?invitationId=${invitation.invitationId}&isPass=2" class="wContentButton redwB">拒绝</a></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                
+            </fieldset>
+    	</form>
     </div>
     
     <!-- Footer line -->

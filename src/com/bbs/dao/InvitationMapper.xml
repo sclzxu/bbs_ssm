@@ -41,6 +41,23 @@
 			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
 			where bbs_invitation.isPass=#{isPass}
 	</select>
+	<!-- 根据 invitationId 查找 Invitation -->
+	<select id="findInvitationById" parameterType="string" resultMap="invitationMap">
+		select invitationId,invitationTitle,invitationMessage,bbs_invitation.userId,
+			bbs_invitation.plateId,bbs_invitation.categoryId,
+			bbs_invitation.isPass invitationIsPass,
+			bbs_invitation.isEnable invitationIsEnable,
+			invitationCreate,invitationModify,plateTitle,userAlice,category
+			from bbs_invitation left join bbs_user 
+			on bbs_invitation.userId=bbs_user.userId
+			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
+			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+			where bbs_invitation.invitationId=#{invitationId}
+	</select>
+	<!-- 根据 invitationId 修改 isPass -->
+	<update id="updateIsPassById">
+		update bbs_invitation set isPass=#{isPass} where invitationId=#{invitationId}
+	</update>
 </mapper>
 
 

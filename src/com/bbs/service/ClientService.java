@@ -22,4 +22,6 @@ public interface ClientService {
 	int addNewInvitation(Invitation invitation);
 	
 	List<Invitation> findAllInvitations(Integer isPass);
+	
+	Invitation findInvitationById(String invitationId);
 }

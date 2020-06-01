@@ -303,6 +303,19 @@ public class ServerController {
 		model.addAttribute("invitations",clientService.findAllInvitations(0));
 		return "manage_invitation";
 	}
+	// 跳转到 manage_view_invitation 页面
+	@RequestMapping(value="/manage_view_invitation/{invitationId}",method=RequestMethod.GET)
+	public String manageViewInvitation(@PathVariable String invitationId,Model model) {
+		// 根据 invitationId 获取 Invitation
+		model.addAttribute("invitation",clientService.findInvitationById(invitationId));
+		return "manage_view_invitation";
+	}
+	@RequestMapping(value="/manage_invitation_pass",method=RequestMethod.GET)
+	public String manageInvitationPass(String invitationId,Integer isPass) {
+		// 根据 invitationId 修改 isPass
+		serverService.updateIsPassById(invitationId, isPass);
+		return "redirect:/server/manage_invitation";
+	}
 }
 
 

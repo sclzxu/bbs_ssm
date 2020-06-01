@@ -97,6 +97,26 @@ public class ClientServiceImpl implements ClientService {
 		}
 		return invitations;
 	}
+	// 根据 invitationId 查找 Invitation
+	@Override
+	public Invitation findInvitationById(String invitationId) {
+		Invitation invitation = invitationMapper.findInvitationById(invitationId);
+		String title = null;
+		String meg = null;
+		try {
+			// 对内容进行解码处理(采用UTF-8编码格式)
+			title = URLDecoder.decode(invitation.getInvitationTitle(),"utf-8");
+			meg = URLDecoder.decode(invitation.getInvitationMessage(),"utf-8");
+			// 屏蔽掉敏感内容
+			meg = meg.replaceAll("(共产党)|(操)","*");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		invitation.setInvitationTitle(title);
+		invitation.setInvitationMessage(meg);
+
+		return invitation;
+	}
 	
 }
 

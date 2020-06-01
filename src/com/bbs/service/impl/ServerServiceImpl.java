@@ -122,5 +122,10 @@ public class ServerServiceImpl implements ServerService {
 	public int updateUserLockById(User user) {
 		return userMapper.updateUserLockById(user);
 	}
+	// 根据 invitationId 修改 isPass
+	@Override
+	public int updateIsPassById(String invitationId, Integer isPass) {
+		return invitationMapper.updateIsPassById(invitationId, isPass);
+	}
 
 }

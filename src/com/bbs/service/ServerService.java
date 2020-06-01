@@ -43,6 +43,8 @@ public interface ServerService {
 	int updateLevelDownById(User user);
 	
 	int updateUserLockById(User user);
+	
+	int updateIsPassById(String invitationId,Integer isPass);
 }
 
 
