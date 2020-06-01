@@ -105,6 +105,8 @@ public class ClientServiceImpl implements ClientService {
 		Invitation invitation = invitationMapper.findInvitationById(invitationId);
 		String title = null;
 		String meg = null;
+		// 把贴子的访问量加 1
+		
 		try {
 			// 对内容进行解码处理(采用UTF-8编码格式)
 			title = URLDecoder.decode(invitation.getInvitationTitle(),"utf-8");
