@@ -64,6 +64,7 @@
     	<!-- 为客户端获取所有板块和分类的数据列表 -->
     	<mvc:interceptor>
     		<mvc:mapping path="/"/>
+    		<mvc:mapping path="/client_view_invitation/*"/>
     		<mvc:mapping path="/client/**"/>
     		<bean class="com.bbs.interceptor.ClientLeftInterceptor"/>
     	</mvc:interceptor>

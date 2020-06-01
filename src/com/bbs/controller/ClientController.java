@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.bbs.pojo.Invitation;
+import com.bbs.pojo.InvitationAns;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
 import com.bbs.service.ServerService;
@@ -169,6 +170,24 @@ public class ClientController {
 		model.addAttribute("error", "发帖成功");
 		
 		return "client_send_invitation";
+	}
+	// 回复贴子功能
+	@RequestMapping(value="/client_view_invitation",method=RequestMethod.POST)
+	public String clientViewInvitation(InvitationAns ans,HttpSession session,Model model) {
+		// 通过 invitationId 获取 invitation
+		Invitation invitation 
+			= clientService.findInvitationById(ans.getInvitation().getInvitationId());
+		model.addAttribute("invitation",invitation);
+		// 给 ans 设置数据
+		User loginer = (User)session.getAttribute("loginer");
+		ans.setAnsId(ans.getInvitation().getInvitationId()
+				+loginer.getUserId()+new Date().getTime());
+		ans.setUser(loginer);
+		ans.setAnsDate(new Date());
+		// 保存到数据库
+		clientService.addNewInvitationAns(ans);
+		model.addAttribute("error","贴子回复成功");
+		return "client_view_invitation";
 	}
 }
 

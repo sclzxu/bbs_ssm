@@ -10,10 +10,12 @@ import javax.annotation.Resource;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
+import com.bbs.dao.InvitationAnsMapper;
 import com.bbs.dao.InvitationMapper;
 import com.bbs.dao.LevelMapper;
 import com.bbs.dao.UserMapper;
 import com.bbs.pojo.Invitation;
+import com.bbs.pojo.InvitationAns;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
@@ -26,6 +28,8 @@ public class ClientServiceImpl implements ClientService {
 	private LevelMapper levelMapper;
 	@Resource
 	private InvitationMapper invitationMapper;
+	@Resource
+	private InvitationAnsMapper invitationAnsMapper;
 	// 根据 userId 查找用户
 	@Override
 	public User findUserById(String userId) {
@@ -126,6 +130,19 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public int updateAccessCountById(String invitationId) {
 		return invitationMapper.updateAccessCountById(invitationId);
+	}
+	// 添加新的回复贴子功能
+	@Override
+	public int addNewInvitationAns(InvitationAns invitationAns) {
+		String meg = null;
+		try {
+			// 对内容进行解码处理(采用UTF-8编码格式)
+			meg = URLEncoder.encode(invitationAns.getAnsMessage(), "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		invitationAns.setAnsMessage(meg);
+		return invitationAnsMapper.addNewInvitationAns(invitationAns);
 	}
 	
 }

@@ -84,22 +84,31 @@
     
     <!-- Main content wrapper -->
     <div class="wrapper">
-    	<form id="validate" class="form" method="post" action="">
-		<input type="hidden" name="invitationId" value="${invitation.invitationId}"/>
+    	<!-- Note -->
+        <div class="nNote nInformation hideit">
+            <p>${error }</p>
+        </div>
+    	<form class="form" method="post" action="${pageContext.request.contextPath}/client/client_view_invitation">
+		<input type="hidden" name="invitation.invitationId" value="${invitation.invitationId}"/>
 		<input type="hidden" name="ansMessage" id="ansMessage"/>
 		<fieldset>
 			<div class="widget">
 				<!-- 帖子内容 -->
 				<div class="title"><h6>${invitation.invitationTitle }</h6></div>
- 				<div class="formRow">
- 					<div class="formLeft">
- 						<img style="width:40px;" src="${pageContext.request.contextPath}/statics/file/${invitation.user.userPhoto}" alt="" />
-						<label>${invitation.user.userAlice }</label><br/>
-						<label><fmt:formatDate value="${invitation.invitationCreate }" pattern="yyyy-MM-dd HH:mm:ss"/></label>
-					</div>
-					<div class="formRight">${invitation.invitationMessage }</div>
+				<div class="formRow">
+ 					<div class="wUserInfo">
+                        <a class="wUserPic"><img style="width:40px;" src="${pageContext.request.contextPath}/statics/file/${invitation.user.userPhoto}" alt="" /></a>
+                        <ul class="leftList">
+                            <li><a><strong>${invitation.user.userAlice }</strong></a></li>
+                            <li><a><strong><fmt:formatDate value="${invitation.invitationCreate }" pattern="yyyy-MM-dd"/></strong></a></li>
+                        </ul>
+                        <div class="formRight">${invitation.invitationMessage }</div>
+                        <div class="clear"></div>
+                    </div>
+					
 					<div class="clear"></div>
 				</div>
+				
 				<div class="clear" style="border-bottom: 20px solid #EEE;"></div>
 				<!-- 帖子回复 -->
 				<!--  
@@ -115,7 +124,7 @@
 				</c:forEach>
 				-->
 				<div class="formRow">
-					<label style="color:red;">${message }</label>
+					<label>&nbsp;</label>
 					<div class="formRight" id="editor"></div>
 					<div class="clear"></div>
 				</div>

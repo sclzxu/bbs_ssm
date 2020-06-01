@@ -3,6 +3,7 @@ package com.bbs.service;
 import java.util.List;
 
 import com.bbs.pojo.Invitation;
+import com.bbs.pojo.InvitationAns;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 
@@ -26,4 +27,6 @@ public interface ClientService {
 	Invitation findInvitationById(String invitationId);
 	
 	int updateAccessCountById(String invitationId);
+	
+	int addNewInvitationAns(InvitationAns invitationAns);
 }
