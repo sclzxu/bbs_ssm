@@ -105,24 +105,27 @@
                         <div class="formRight">${invitation.invitationMessage }</div>
                         <div class="clear"></div>
                     </div>
-					
 					<div class="clear"></div>
 				</div>
 				
 				<div class="clear" style="border-bottom: 20px solid #EEE;"></div>
 				<!-- 帖子回复 -->
-				<!--  
 				<c:forEach items="${anss }" var="ans">
 				<div class="formRow">
-					<img style="width:40px;" src="${pageContext.request.contextPath}/static/file/${ans.userPhoto}" alt="" /><br/>
-					<label>${ans.userAlice }<br/>
-					<fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd HH:mm:ss"/></label>
-					<div class="formRight">${ans.ansMessage }</div>
+ 					<div class="wUserInfo">
+                        <a class="wUserPic"><img style="width:40px;" src="${pageContext.request.contextPath}/statics/file/${ans.user.userPhoto}" alt="" /></a>
+                        <ul class="leftList">
+                            <li><a><strong>${ans.user.userAlice }</strong></a></li>
+                            <li><a><strong><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/></strong></a></li>
+                        </ul>
+                        <div class="formRight">${ans.ansMessage }</div>
+                        <div class="clear"></div>
+                    </div>
 					<div class="clear"></div>
 				</div>
-				<div class="clear"></div>
 				</c:forEach>
-				-->
+				
+				<div class="clear" style="border-bottom: 10px solid #EEE;"></div>
 				<div class="formRow">
 					<label>&nbsp;</label>
 					<div class="formRight" id="editor"></div>

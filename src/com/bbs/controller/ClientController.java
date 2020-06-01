@@ -187,6 +187,9 @@ public class ClientController {
 		// 保存到数据库
 		clientService.addNewInvitationAns(ans);
 		model.addAttribute("error","贴子回复成功");
+		// 获取所有的回复信息
+		model.addAttribute("anss",
+				clientService.findInvitationAnsByInvitationId(ans.getInvitation().getInvitationId()));
 		return "client_view_invitation";
 	}
 }

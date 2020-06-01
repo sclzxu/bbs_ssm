@@ -144,6 +144,24 @@ public class ClientServiceImpl implements ClientService {
 		invitationAns.setAnsMessage(meg);
 		return invitationAnsMapper.addNewInvitationAns(invitationAns);
 	}
+	// 根据 invitationId 查询所有回复 
+	@Override
+	public List<InvitationAns> findInvitationAnsByInvitationId(String invitationId) {
+		List<InvitationAns> anss = invitationAnsMapper.findInvitationAnsByInvitationId(invitationId);
+		String meg = null;
+		for(InvitationAns ans : anss) {
+			try {
+				// 对内容进行解码处理(采用UTF-8编码格式)
+				meg = URLDecoder.decode(ans.getAnsMessage(),"utf-8");
+				// 屏蔽掉敏感内容
+				meg = meg.replaceAll("(共产党)|(操)","*");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ans.setAnsMessage(meg);
+		}
+		return anss;
+	}
 	
 }
 

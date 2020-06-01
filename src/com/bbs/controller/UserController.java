@@ -101,6 +101,8 @@ public class UserController {
 	public String clientViewInvitation(@PathVariable String invitationId,Model model) {
 		Invitation invitation = clientService.findInvitationById(invitationId);
 		model.addAttribute("invitation",invitation);
+		// 获取所有的回复列表
+		model.addAttribute("anss",clientService.findInvitationAnsByInvitationId(invitationId));
 		return "client_view_invitation";
 	}
 }

@@ -29,4 +29,6 @@ public interface ClientService {
 	int updateAccessCountById(String invitationId);
 	
 	int addNewInvitationAns(InvitationAns invitationAns);
+	
+	List<InvitationAns> findInvitationAnsByInvitationId(String invitationId);
 }
