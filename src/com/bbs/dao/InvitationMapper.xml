@@ -53,7 +53,8 @@
 			bbs_invitation.plateId,bbs_invitation.categoryId,
 			bbs_invitation.isPass invitationIsPass,
 			bbs_invitation.isEnable invitationIsEnable,
-			invitationCreate,invitationModify,plateTitle,userAlice,category
+			invitationCreate,invitationModify,plateTitle,userAlice,category,
+			userPhoto
 			from bbs_invitation left join bbs_user 
 			on bbs_invitation.userId=bbs_user.userId
 			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
@@ -63,6 +64,10 @@
 	<!-- 根据 invitationId 修改 isPass -->
 	<update id="updateIsPassById">
 		update bbs_invitation set isPass=#{isPass} where invitationId=#{invitationId}
+	</update>
+	<!-- 通过 invitationId 修改 accessCount 增加1 -->
+	<update id="updateAccessCountById" parameterType="string">
+		update bbs_invitation set accessCount=accessCount+1 where invitationId=#{invitationId}
 	</update>
 </mapper>
 

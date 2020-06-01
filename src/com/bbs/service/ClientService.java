@@ -24,4 +24,6 @@ public interface ClientService {
 	List<Invitation> findAllInvitations(Integer isPass,Integer plateId,Integer categoryId);
 	
 	Invitation findInvitationById(String invitationId);
+	
+	int updateAccessCountById(String invitationId);
 }

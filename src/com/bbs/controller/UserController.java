@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
@@ -92,5 +94,13 @@ public class UserController {
 		user.setUserLevel(level);
 		clientService.addNewUser(user);
 		return "redirect:/login";
+	}
+	// 跳转到 client_view_invitation
+	@RequestMapping(
+			value="/client_view_invitation/{invitationId}",method=RequestMethod.GET)
+	public String clientViewInvitation(@PathVariable String invitationId,Model model) {
+		Invitation invitation = clientService.findInvitationById(invitationId);
+		model.addAttribute("invitation",invitation);
+		return "client_view_invitation";
 	}
 }

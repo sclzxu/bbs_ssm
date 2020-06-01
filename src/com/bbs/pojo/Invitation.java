@@ -13,6 +13,7 @@ public class Invitation {
 	private Integer isEnable;
 	private Date invitationCreate;
 	private Date invitationModify;
+	private Integer accessCount;
 	public String getInvitationId() {
 		return invitationId;
 	}
@@ -72,5 +73,11 @@ public class Invitation {
 	}
 	public void setInvitationModify(Date invitationModify) {
 		this.invitationModify = invitationModify;
+	}
+	public Integer getAccessCount() {
+		return accessCount;
+	}
+	public void setAccessCount(Integer accessCount) {
+		this.accessCount = accessCount;
 	}
 }

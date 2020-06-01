@@ -20,4 +20,6 @@ public interface InvitationMapper {
 	
 	int updateIsPassById(@Param("invitationId") String invitationId,
 			@Param("isPass") Integer isPass);
+	
+	int updateAccessCountById(String invitationId);
 }

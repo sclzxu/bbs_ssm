@@ -83,7 +83,7 @@
     	<form class="form">
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>个人信息</h6></div>
+                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>个人信息</h6></div>
                     <div class="formRow">
                     	<label for="userId">账户:</label>
                         <div class="formRight">

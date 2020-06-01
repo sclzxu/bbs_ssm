@@ -105,7 +105,8 @@ public class ClientServiceImpl implements ClientService {
 		Invitation invitation = invitationMapper.findInvitationById(invitationId);
 		String title = null;
 		String meg = null;
-		// 把贴子的访问量加 1
+		// 把贴子的访问量加 1（访问贴子，访问量增加1）
+		updateAccessCountById(invitationId);
 		
 		try {
 			// 对内容进行解码处理(采用UTF-8编码格式)
@@ -120,6 +121,11 @@ public class ClientServiceImpl implements ClientService {
 		invitation.setInvitationMessage(meg);
 
 		return invitation;
+	}
+	// 通过 invitationId 修改 accessCount 增加1
+	@Override
+	public int updateAccessCountById(String invitationId) {
+		return invitationMapper.updateAccessCountById(invitationId);
 	}
 	
 }
