@@ -11,7 +11,10 @@ public interface InvitationMapper {
 	
 	int addNewInvitation(Invitation invitation);
 	
-	List<Invitation> findAllInvitations(Integer isPass);
+	List<Invitation> findAllInvitations(
+			@Param("isPass") Integer isPass,
+			@Param("plateId") Integer plateId,
+			@Param("categoryId") Integer categoryId);
 	
 	Invitation findInvitationById(String invitationId);
 	

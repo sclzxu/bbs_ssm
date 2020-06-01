@@ -11,10 +11,10 @@
     	<c:forEach items="${plates}" var="plate">
         <li class="tables"><a href="#" title="" class="exp"><span>${plate.plateTitle}</span><strong>${categories.size()+2 }</strong></a>
             <ul class="sub">
-            	<li><li><a href="#?plateId=${plate.plateId}&categoryId=0" title="">全部</a></li></li>
+            	<li><li><a href="${pageContext.request.contextPath}/?plateId=${plate.plateId}&categoryId=0" title="">全部</a></li></li>
             	<li><li><a href="#?plateId=${plate.plateId}&categoryId=-1" title="">精华</a></li></li>
             	<c:forEach items="${categories }" var="ctg">
-            		<li><a href="#?plateId=${plate.plateId}&categoryId=${ctg.categoryId}" title="">${ctg.category}</a></li>
+            		<li><a href="${pageContext.request.contextPath}/?plateId=${plate.plateId}&categoryId=${ctg.categoryId}" title="">${ctg.category}</a></li>
             	</c:forEach>
             </ul>
         </li>

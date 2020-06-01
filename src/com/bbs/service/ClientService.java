@@ -21,7 +21,7 @@ public interface ClientService {
 	
 	int addNewInvitation(Invitation invitation);
 	
-	List<Invitation> findAllInvitations(Integer isPass);
+	List<Invitation> findAllInvitations(Integer isPass,Integer plateId,Integer categoryId);
 	
 	Invitation findInvitationById(String invitationId);
 }

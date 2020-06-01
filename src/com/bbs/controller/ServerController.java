@@ -300,7 +300,7 @@ public class ServerController {
 	@RequestMapping(value="/manage_invitation",method=RequestMethod.GET)
 	public String manageInvitation(Model model) {
 		// 得到所有待审核的贴子
-		model.addAttribute("invitations",clientService.findAllInvitations(0));
+		model.addAttribute("invitations",clientService.findAllInvitations(0,0,0));
 		return "manage_invitation";
 	}
 	// 跳转到 manage_view_invitation 页面

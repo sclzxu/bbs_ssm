@@ -14,9 +14,9 @@ public class IndexController {
 	private ClientService clientService;
 	// 访问 index 页面
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(Integer plateId,Integer categoryId,Model model) {
 		// 获取所有的贴子信息
-		model.addAttribute("invitations",clientService.findAllInvitations(1));
+		model.addAttribute("invitations",clientService.findAllInvitations(1,plateId,categoryId));
 		return "index";
 	}
 }

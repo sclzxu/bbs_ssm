@@ -29,7 +29,7 @@
 			#{user.userId},#{plate.plateId},#{category.categoryId},#{invitationCreate})
 	</insert>
 	<!-- 获取所有的贴子 -->
-	<select id="findAllInvitations" parameterType="int" resultMap="invitationMap">
+	<select id="findAllInvitations" resultMap="invitationMap">
 		select invitationId,invitationTitle,invitationMessage,bbs_invitation.userId,
 			bbs_invitation.plateId,bbs_invitation.categoryId,
 			bbs_invitation.isPass invitationIsPass,
@@ -40,6 +40,12 @@
 			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
 			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
 			where bbs_invitation.isPass=#{isPass}
+			<if test="plateId!=null and plateId!=0">
+				and bbs_plate.plateId=#{plateId}
+			</if>
+			<if test="categoryId!=null and categoryId!=0 and categoryId!=-1">
+				and bbs_category.categoryId=#{categoryId}
+			</if>
 	</select>
 	<!-- 根据 invitationId 查找 Invitation -->
 	<select id="findInvitationById" parameterType="string" resultMap="invitationMap">
