@@ -4914,7 +4914,7 @@
 					{
 						if ( aaSort[j][0] == i )
 						{
-							sClass = ( aaSort[j][1] == "desc" ) ?
+							sClass = ( aaSort[j][1] == "asc" ) ?
 								oClasses.sSortAsc : oClasses.sSortDesc;
 							iFound = j;
 							break;
@@ -4934,7 +4934,7 @@
 						{
 						 	sSpanClass = oSettings.aoColumns[i].sSortingClassJUI;
 						}
-						else if ( aaSort[iFound][1] == "desc" )
+						else if ( aaSort[iFound][1] == "asc" )
 						{
 							sSpanClass = oClasses.sSortJUIAsc;
 						}
