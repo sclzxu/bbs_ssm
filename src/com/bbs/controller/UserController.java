@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bbs.pojo.Invitation;
+import com.bbs.pojo.InvitationInter;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
@@ -98,11 +99,19 @@ public class UserController {
 	// 跳转到 client_view_invitation
 	@RequestMapping(
 			value="/client_view_invitation/{invitationId}",method=RequestMethod.GET)
-	public String clientViewInvitation(@PathVariable String invitationId,Model model) {
+	public String clientViewInvitation(@PathVariable String invitationId,
+			HttpSession session,Model model) {
 		Invitation invitation = clientService.findInvitationById(invitationId);
 		model.addAttribute("invitation",invitation);
 		// 获取所有的回复列表
 		model.addAttribute("anss",clientService.findInvitationAnsByInvitationId(invitationId));
+		// 获取用户登录信息
+		Object obj = session.getAttribute("loginer");
+		if(obj != null) {
+			InvitationInter inter = clientService.findInvitationInterByUidAndIid(
+					((User)obj).getUserId(), invitationId);
+			model.addAttribute("inter",inter);
+		}
 		return "client_view_invitation";
 	}
 }

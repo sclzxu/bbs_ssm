@@ -16,7 +16,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSON;
 import com.bbs.pojo.Invitation;
 import com.bbs.pojo.InvitationAns;
+import com.bbs.pojo.InvitationInter;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
 import com.bbs.service.ServerService;
@@ -190,6 +190,11 @@ public class ClientController {
 		// 获取所有的回复信息
 		model.addAttribute("anss",
 				clientService.findInvitationAnsByInvitationId(ans.getInvitation().getInvitationId()));
+		// 根据 storeUserId和invitationId 判断用户是否收藏对应贴子
+		InvitationInter inter = clientService.findInvitationInterByUidAndIid(
+				loginer.getUserId(),ans.getInvitation().getInvitationId());
+		model.addAttribute("inter",inter);
+		
 		return "client_view_invitation";
 	}
 }

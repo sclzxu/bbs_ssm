@@ -94,7 +94,20 @@
 		<fieldset>
 			<div class="widget">
 				<!-- 帖子内容 -->
-				<div class="title"><h6>${invitation.invitationTitle }</h6></div>
+				<div class="title">
+					<h6>${invitation.invitationTitle }
+					 <c:if test="${!empty loginer && loginer.userId!=invitation.user.userId}">
+					 	<c:choose>
+					 		<c:when test="${empty inter }">
+						 		<a href="#"><strong>收藏此贴</strong></a>
+					 		</c:when>
+					 		<c:otherwise>
+					 			<a href="#"><strong>取消收藏</strong></a>
+					 		</c:otherwise>
+					 	</c:choose>
+					 </c:if>
+					 </h6>
+				</div>
 				<div class="formRow">
  					<div class="wUserInfo">
                         <a class="wUserPic"><img style="width:40px;" src="${pageContext.request.contextPath}/statics/file/${invitation.user.userPhoto}" alt="" /></a>

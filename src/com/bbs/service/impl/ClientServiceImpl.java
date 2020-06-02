@@ -11,11 +11,13 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
 import com.bbs.dao.InvitationAnsMapper;
+import com.bbs.dao.InvitationInterMapper;
 import com.bbs.dao.InvitationMapper;
 import com.bbs.dao.LevelMapper;
 import com.bbs.dao.UserMapper;
 import com.bbs.pojo.Invitation;
 import com.bbs.pojo.InvitationAns;
+import com.bbs.pojo.InvitationInter;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
@@ -30,6 +32,8 @@ public class ClientServiceImpl implements ClientService {
 	private InvitationMapper invitationMapper;
 	@Resource
 	private InvitationAnsMapper invitationAnsMapper;
+	@Resource
+	private InvitationInterMapper invitationInterMapper;
 	// 根据 userId 查找用户
 	@Override
 	public User findUserById(String userId) {
@@ -161,6 +165,11 @@ public class ClientServiceImpl implements ClientService {
 			ans.setAnsMessage(meg);
 		}
 		return anss;
+	}
+	// 根据 storeUserId和invitationId 判断用户是否收藏对应贴子
+	@Override
+	public InvitationInter findInvitationInterByUidAndIid(String userId,String invitationId) {
+		return invitationInterMapper.findInvitationInterByUidAndIid(userId,invitationId);
 	}
 	
 }

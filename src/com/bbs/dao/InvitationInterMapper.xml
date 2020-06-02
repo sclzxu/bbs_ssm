@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.InvitationInterMapper">
+	<!-- 根据 storeUserId和invitationId 判断用户是否收藏对应贴子 -->
+	<select id="findInvitationInterByUidAndIid" resultType="InvitationInter">
+		select * from bbs_invitation_inter 
+			where storeUserId=#{userId} and invitationId=#{invitationId}
+	</select>
+</mapper>
+
+
+

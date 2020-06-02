@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bbs.pojo.Invitation;
 import com.bbs.pojo.InvitationAns;
+import com.bbs.pojo.InvitationInter;
 import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 
@@ -31,4 +32,6 @@ public interface ClientService {
 	int addNewInvitationAns(InvitationAns invitationAns);
 	
 	List<InvitationAns> findInvitationAnsByInvitationId(String invitationId);
+	
+	InvitationInter findInvitationInterByUidAndIid(String userId,String invitationId);
 }
