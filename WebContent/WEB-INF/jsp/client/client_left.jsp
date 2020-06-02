@@ -7,7 +7,7 @@
     
     <!-- Left navigation -->
     <ul id="menu" class="nav">
-    	<li class="tables"><a href="#" title="" class="exp"><span>热门主题</span></a>
+    	<li class="tables"><a href="${pageContext.request.contextPath}/hot_invitations" title=""><span>热门主题</span></a>
     	<c:forEach items="${plates}" var="plate">
         <li class="tables"><a href="#" title="" class="exp"><span>${plate.plateTitle}</span><strong>${categories.size()+2 }</strong></a>
             <ul class="sub">

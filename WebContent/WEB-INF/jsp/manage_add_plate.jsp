@@ -87,7 +87,7 @@
     			action="${pageContext.request.contextPath}/server/manage_add_plate">
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>添加板块</h6></div>
+                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>添加板块</h6></div>
                     <div class="formRow">
                     	<form:label path="plateTitle">板块标题:<span class="req">*</span></form:label>
                         <div class="formRight">

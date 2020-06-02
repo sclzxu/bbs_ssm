@@ -38,4 +38,6 @@ public interface ClientService {
 	int addNewInvitationInter(String userId,String invitationId);
 	
 	int delInvitationInterByUidAndIid(String userId,String invitationId);
+	
+	List<Invitation> findAllHotInvitations();
 }

@@ -135,7 +135,7 @@
 				<fieldset>
 					<div class="widget">
 						<div class="title">
-							<img src="images/icons/dark/alert.png" alt="" class="titleIcon" />
+							<img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" />
 							<h6>用户操作</h6>
 						</div>
 						<div class="formRow">

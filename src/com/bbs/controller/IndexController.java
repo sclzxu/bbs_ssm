@@ -19,4 +19,11 @@ public class IndexController {
 		model.addAttribute("invitations",clientService.findAllInvitations(1,plateId,categoryId));
 		return "index";
 	}
+	// 获取热门主题
+	@RequestMapping("/hot_invitations")
+	public String hot(Model model) {
+		// 获取所有的贴子信息
+		model.addAttribute("invitations",clientService.findAllHotInvitations());
+		return "index";
+	}
 }

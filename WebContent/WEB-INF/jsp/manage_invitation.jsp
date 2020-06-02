@@ -81,7 +81,7 @@
     <div class="wrapper">
     	<!-- Dynamic table -->
         <div class="widget">
-            <div class="title"><img src="images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>未审核贴子</h6></div>                          
+            <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/full2.png" alt="" class="titleIcon" /><h6>未审核贴子</h6></div>                          
             <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
             <thead>
             <tr>

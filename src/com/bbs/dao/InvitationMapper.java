@@ -22,4 +22,6 @@ public interface InvitationMapper {
 			@Param("isPass") Integer isPass);
 	
 	int updateAccessCountById(String invitationId);
+	
+	List<Invitation> findAllHotInvitations();
 }

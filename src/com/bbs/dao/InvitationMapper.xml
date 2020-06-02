@@ -69,6 +69,24 @@
 	<update id="updateAccessCountById" parameterType="string">
 		update bbs_invitation set accessCount=accessCount+1 where invitationId=#{invitationId}
 	</update>
+	<!-- 获取所有热门贴子 -->
+	<select id="findAllHotInvitations" resultMap="invitationMap">
+		select invitationId,invitationTitle,invitationMessage,bbs_invitation.userId,
+			bbs_invitation.plateId,bbs_invitation.categoryId,
+			bbs_invitation.isPass invitationIsPass,
+			bbs_invitation.isEnable invitationIsEnable,
+			invitationCreate,invitationModify,plateTitle,userAlice,category
+			from bbs_invitation left join bbs_user 
+			on bbs_invitation.userId=bbs_user.userId
+			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
+			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+			where bbs_invitation.isPass=1
+			and bbs_invitation.invitationId in(
+				select bbs_invitation_inter.invitationId from bbs_invitation_inter
+					group by bbs_invitation_inter.invitationId 
+					having count(*)>=10
+			)
+	</select>
 </mapper>
 
 

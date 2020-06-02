@@ -83,7 +83,7 @@
     	<form:form cssClass="form" method="post" modelAttribute="user" action="">
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>用户信息</h6></div>
+                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>用户信息</h6></div>
                     <div class="formRow">
                     	<form:label path="userId">账户:</form:label>
                         <div class="formRight">

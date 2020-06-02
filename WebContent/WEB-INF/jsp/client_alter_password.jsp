@@ -88,7 +88,7 @@
     		<form:hidden path="userId"/>
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>修改密码</h6></div>
+                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>修改密码</h6></div>
                     <div class="formRow">
                     	<form:label path="userPsw">原密码:<span class="req">*</span></form:label>
                         <div class="formRight">

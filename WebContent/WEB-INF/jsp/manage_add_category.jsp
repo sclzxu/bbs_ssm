@@ -87,7 +87,7 @@
     			action="${pageContext.request.contextPath}/server/manage_add_category">
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>添加分类</h6></div>
+                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>添加分类</h6></div>
                     <div class="formRow">
                     	<form:label path="category">分类名称:<span class="req">*</span></form:label>
                         <div class="formRight">
