@@ -248,6 +248,13 @@ public class ClientController {
 		model.addAttribute("invitations",clientService.findAllInvitationsByUid(loginer.getUserId()));
 		return "client_sended_invitation";
 	}
+	// 跳转到 client_invitation_person
+	@RequestMapping(value="client_invitation_person/{invitationId}",method=RequestMethod.GET)
+	public String clientInvitationPerson(@PathVariable String invitationId,Model model) {
+		Invitation invitation = clientService.findInvitationById(invitationId);
+		model.addAttribute("invitation",invitation);
+		return "client_invitation_person";
+	}
 }
 
 
