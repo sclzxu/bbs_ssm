@@ -171,6 +171,16 @@ public class ClientServiceImpl implements ClientService {
 	public InvitationInter findInvitationInterByUidAndIid(String userId,String invitationId) {
 		return invitationInterMapper.findInvitationInterByUidAndIid(userId,invitationId);
 	}
+	// 收藏贴子
+	@Override
+	public int addNewInvitationInter(String userId, String invitationId) {
+		return invitationInterMapper.addNewInvitationInter(userId, invitationId);
+	}
+	// 取消收藏
+	@Override
+	public int delInvitationInterByUidAndIid(String userId, String invitationId) {
+		return invitationInterMapper.delInvitationInterByUidAndIid(userId,invitationId);
+	}
 	
 }
 

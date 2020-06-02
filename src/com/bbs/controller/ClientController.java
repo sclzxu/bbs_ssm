@@ -197,6 +197,44 @@ public class ClientController {
 		
 		return "client_view_invitation";
 	}
+	// 收藏贴子
+	@RequestMapping("/add_new_invitation_inter")
+	public String addNewInvitationInter(String invitationId,
+			HttpSession session,Model model) {
+		// 通过 invitationId 获取 invitation
+		Invitation invitation 
+			= clientService.findInvitationById(invitationId);
+		model.addAttribute("invitation",invitation);
+		// 获取所有的回复信息
+		model.addAttribute("anss",
+				clientService.findInvitationAnsByInvitationId(invitationId));
+		// 保存 InvitationInter 到数据库
+		User loginer = (User)session.getAttribute("loginer");
+		clientService.addNewInvitationInter(loginer.getUserId(),invitationId);
+		// 在 model中设置一个 inter 值
+		model.addAttribute("inter",new InvitationInter());
+		
+		return "client_view_invitation";
+	}
+	// 取消收藏贴子
+	@RequestMapping("/del_invitation_inter")
+	public String delInvitationInter(String invitationId,
+			HttpSession session,Model model) {
+		// 通过 invitationId 获取 invitation
+		Invitation invitation 
+			= clientService.findInvitationById(invitationId);
+		model.addAttribute("invitation",invitation);
+		// 获取所有的回复信息
+		model.addAttribute("anss",
+				clientService.findInvitationAnsByInvitationId(invitationId));
+		// 删除表 bbs_invitation_inter 中对应的记录
+		User loginer = (User)session.getAttribute("loginer");
+		clientService.delInvitationInterByUidAndIid(loginer.getUserId(),invitationId);
+		// 在 model中设置一个 inter 值
+		model.addAttribute("inter",null);
+		
+		return "client_view_invitation";
+	}
 }
 
 

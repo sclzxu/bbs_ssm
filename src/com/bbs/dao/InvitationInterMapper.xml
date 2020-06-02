@@ -8,6 +8,16 @@
 		select * from bbs_invitation_inter 
 			where storeUserId=#{userId} and invitationId=#{invitationId}
 	</select>
+	<!-- 收藏贴子 -->
+	<insert id="addNewInvitationInter">
+		insert into bbs_invitation_inter(storeUserId,invitationId)
+			values(#{userId},#{invitationId})
+	</insert>
+	<!-- 取消收藏 -->
+	<delete id="delInvitationInterByUidAndIid">
+		delete from bbs_invitation_inter 
+			where storeUserId=#{userId} and invitationId=#{invitationId}
+	</delete>
 </mapper>
 
 

@@ -99,10 +99,10 @@
 					 <c:if test="${!empty loginer && loginer.userId!=invitation.user.userId}">
 					 	<c:choose>
 					 		<c:when test="${empty inter }">
-						 		<a href="#"><strong>收藏此贴</strong></a>
+						 		<a href="${pageContext.request.contextPath}/client/add_new_invitation_inter?invitationId=${invitation.invitationId}"><strong>收藏此贴</strong></a>
 					 		</c:when>
 					 		<c:otherwise>
-					 			<a href="#"><strong>取消收藏</strong></a>
+					 			<a href="${pageContext.request.contextPath}/client/del_invitation_inter?invitationId=${invitation.invitationId}"><strong>取消收藏</strong></a>
 					 		</c:otherwise>
 					 	</c:choose>
 					 </c:if>

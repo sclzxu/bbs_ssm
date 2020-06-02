@@ -34,4 +34,8 @@ public interface ClientService {
 	List<InvitationAns> findInvitationAnsByInvitationId(String invitationId);
 	
 	InvitationInter findInvitationInterByUidAndIid(String userId,String invitationId);
+	
+	int addNewInvitationInter(String userId,String invitationId);
+	
+	int delInvitationInterByUidAndIid(String userId,String invitationId);
 }
