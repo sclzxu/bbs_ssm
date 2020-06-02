@@ -26,4 +26,6 @@ public interface InvitationMapper {
 	List<Invitation> findAllHotInvitations();
 	
 	List<Invitation> findCreamByPlateId(Integer plateId);
+	
+	List<Invitation> findAllInvitationsByUid(String userId);
 }

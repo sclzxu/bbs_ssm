@@ -112,6 +112,18 @@
 			where bbs_invitation_inter.invitationId=bbs_invitation.invitationId)*200>=1000	
 		)
 	</select>
+	<!-- 获取指定 userId 所有的贴子 -->
+	<select id="findAllInvitationsByUid" resultMap="invitationMap">
+		select invitationId,invitationTitle,invitationMessage,bbs_invitation.userId,
+			bbs_invitation.plateId,bbs_invitation.categoryId,
+			bbs_invitation.isPass invitationIsPass,
+			bbs_invitation.isEnable invitationIsEnable,
+			invitationCreate,invitationModify,plateTitle,category
+			from bbs_invitation
+			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
+			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+			where bbs_invitation.userId=#{userId}
+	</select>
 </mapper>
 
 

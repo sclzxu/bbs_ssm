@@ -16,6 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -234,6 +235,18 @@ public class ClientController {
 		model.addAttribute("inter",null);
 		
 		return "client_view_invitation";
+	}
+	// 跳转到 client_manage_invitation 页面
+	@RequestMapping(value="/client_manage_invitation",method=RequestMethod.GET)
+	public String clientManageInvitation() {
+		return "client_manage_invitation";
+	}
+	// 跳转到 client_sended_invitation
+	@RequestMapping(value="/client_sended_invitation",method=RequestMethod.GET)
+	public String clientSendedInvitation(HttpSession session,Model model) {
+		User loginer = (User)session.getAttribute("loginer");
+		model.addAttribute("invitations",clientService.findAllInvitationsByUid(loginer.getUserId()));
+		return "client_sended_invitation";
 	}
 }
 
