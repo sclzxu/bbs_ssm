@@ -66,6 +66,10 @@
     		<mvc:mapping path="/"/>
     		<mvc:mapping path="/client_view_invitation/*"/>
     		<mvc:mapping path="/client/**"/>
+    		<mvc:mapping path="/hot_invitations/"/>
+    		<mvc:mapping path="/hot_invitations"/>
+    		<mvc:mapping path="/cream"/>
+    		<mvc:mapping path="/cream/"/>
     		<bean class="com.bbs.interceptor.ClientLeftInterceptor"/>
     	</mvc:interceptor>
     	<!-- 用户登录后才能使用前端用户功能 -->

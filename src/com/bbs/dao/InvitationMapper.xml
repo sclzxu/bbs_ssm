@@ -43,7 +43,7 @@
 			<if test="plateId!=null and plateId!=0">
 				and bbs_plate.plateId=#{plateId}
 			</if>
-			<if test="categoryId!=null and categoryId!=0 and categoryId!=-1">
+			<if test="categoryId!=null and categoryId!=0">
 				and bbs_category.categoryId=#{categoryId}
 			</if>
 	</select>
@@ -86,6 +86,31 @@
 					group by bbs_invitation_inter.invitationId 
 					having count(*)>=10
 			)
+	</select>
+	<!-- 查找对应板块的精华帖 -->
+	<select id="findCreamByPlateId" parameterType="int" resultMap="invitationMap">
+		select invitationId,invitationTitle,invitationMessage,bbs_invitation.userId,
+		bbs_invitation.plateId,bbs_invitation.categoryId,
+		bbs_invitation.isPass invitationIsPass,
+		bbs_invitation.isEnable invitationIsEnable,
+		invitationCreate,invitationModify,plateTitle,userAlice,category
+		from bbs_invitation left join bbs_user 
+		on bbs_invitation.userId=bbs_user.userId
+		left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
+		left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+		where bbs_invitation.isPass=1
+		and bbs_plate.plateId=#{plateId}
+		and bbs_invitation.invitationId in(
+			select bbs_invitation.invitationId
+ 			from bbs_invitation
+ 			where isPass=1
+ 			and accessCount
+ 			+(select count(distinct bbs_invitation_ans.userId) from  bbs_invitation_ans 
+   				where bbs_invitation_ans.invitationId=bbs_invitation.invitationId 
+   			and bbs_invitation_ans.userId!=bbs_invitation.userId)*100
+ 			+(select count(*) from bbs_invitation_inter 
+			where bbs_invitation_inter.invitationId=bbs_invitation.invitationId)*200>=1000	
+		)
 	</select>
 </mapper>
 

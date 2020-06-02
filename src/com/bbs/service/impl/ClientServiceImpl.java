@@ -202,6 +202,27 @@ public class ClientServiceImpl implements ClientService {
 		}
 		return invitations;
 	}
+	// 得到对应 plateId 的精华帖
+	@Override
+	public List<Invitation> findCreamByPlateId(Integer plateId) {
+		List<Invitation> invitations = invitationMapper.findCreamByPlateId(plateId);
+		String title = null;
+		String meg = null;
+		for(Invitation inv : invitations) {
+			try {
+				// 对内容进行解码处理(采用UTF-8编码格式)
+				title = URLDecoder.decode(inv.getInvitationTitle(),"utf-8");
+				meg = URLDecoder.decode(inv.getInvitationMessage(),"utf-8");
+				// 屏蔽掉敏感内容
+				meg = meg.replaceAll("(共产党)|(操)","*");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			inv.setInvitationTitle(title);
+			inv.setInvitationMessage(meg);
+		}
+		return invitations;
+	}
 	
 }
 

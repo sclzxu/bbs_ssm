@@ -33,7 +33,6 @@ public class ClientLeftInterceptor implements HandlerInterceptor {
 		// 放入数据
 		request.setAttribute("plates", plates);
 		request.setAttribute("categories", categories);
-		
 		return true;
 	}
 }

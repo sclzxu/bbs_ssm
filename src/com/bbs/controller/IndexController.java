@@ -26,4 +26,17 @@ public class IndexController {
 		model.addAttribute("invitations",clientService.findAllHotInvitations());
 		return "index";
 	}
+	// 获取对应板块的精华帖
+	@RequestMapping("/cream")
+	public String cream(Integer plateId,Model model) {
+		// 获取所有的贴子信息
+		model.addAttribute("invitations",clientService.findCreamByPlateId(plateId));
+		return "index";
+	}
 }
+
+
+
+
+
+

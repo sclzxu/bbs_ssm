@@ -24,4 +24,6 @@ public interface InvitationMapper {
 	int updateAccessCountById(String invitationId);
 	
 	List<Invitation> findAllHotInvitations();
+	
+	List<Invitation> findCreamByPlateId(Integer plateId);
 }

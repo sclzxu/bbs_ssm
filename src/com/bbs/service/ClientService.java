@@ -40,4 +40,6 @@ public interface ClientService {
 	int delInvitationInterByUidAndIid(String userId,String invitationId);
 	
 	List<Invitation> findAllHotInvitations();
+	
+	List<Invitation> findCreamByPlateId(Integer plateId);
 }
