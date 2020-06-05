@@ -1,6 +1,9 @@
 package com.bbs.controller;
 
 import java.util.Date;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -20,6 +23,17 @@ import com.bbs.pojo.Level;
 import com.bbs.pojo.User;
 import com.bbs.service.ClientService;
 import com.bbs.service.UserService;
+import com.mysql.jdbc.StringUtils;
+
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 @Controller
 public class UserController {
@@ -113,5 +127,89 @@ public class UserController {
 			model.addAttribute("inter",inter);
 		}
 		return "client_view_invitation";
+	}
+	// 跳转到 user_reset_password
+	@RequestMapping(value="/user_reset_password",method=RequestMethod.GET)
+	public String userResetPassword() {
+		return "user_reset_password";
+	}
+	// 重置密码
+	@RequestMapping(value="/user_reset_password",method=RequestMethod.POST)
+	public String userResetPassword(String userId,String yzm,
+				HttpSession session,Model model) {
+		if(StringUtils.isNullOrEmpty(userId)
+				|| StringUtils.isNullOrEmpty(yzm)) {
+			model.addAttribute("error", "账户和验证码都不能为空");
+			return "user_reset_password";
+		}
+		Object obj = session.getAttribute("yzm");
+		if(!yzm.equals(obj.toString())) {
+			model.addAttribute("error", "验证码输入错误");
+			return "user_reset_password";
+		}
+		// 根据账户id查找账户
+		User user = clientService.findUserById(userId);
+		if(null == user) {
+			model.addAttribute("error", "账户不存在");
+			return "user_reset_password";
+		}
+		// 获取账户邮箱
+		String email = user.getUserEmail();
+		if(null == email) {
+			model.addAttribute("error", "未设置邮箱，无法重置");
+			return "user_reset_password";
+		}
+		String regEx1 = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+		Pattern p = Pattern.compile(regEx1);
+		Matcher m = p.matcher(email);
+		if(!m.matches()){
+			model.addAttribute("error", "邮箱错误，无法重置");
+			return "user_reset_password";
+        }
+		// 重置密码为6个6，并且发送到邮箱
+		user.setUserPsw("666666");
+		clientService.updateUserPswById(user);
+		Properties props = new Properties();
+		// 设置发送邮件的邮件服务器的属性（这里使用网易的smtp服务器，也可以使用其他邮箱服务器，
+		// 什么邮箱就要使用对应的服务器，比如163邮箱服务器，就写“smtp.163.com”）
+		props.put("mail.smtp.host","smtp.163.com");
+		// 需要经过授权，也就是有户名和密码的校验，这样才能通过验证（一定要有这一条）
+		props.put("mail.smtp.auth", "true");
+		// 用刚刚设置好的props对象构建一个session
+		Session emailSession = Session.getDefaultInstance(props);
+		// 用session为参数定义消息对象
+		MimeMessage message = new MimeMessage(emailSession);
+		try {
+			// 加载发件人地址
+			message.setFrom(new InternetAddress("你的邮箱地址，比如123@qq.com"));
+			// 加载收件人地址
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getUserEmail()));
+			// 加载标题
+			message.setSubject("密码重置");
+			// 向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
+			Multipart multipart = new MimeMultipart();
+
+			// 设置邮件的文本内容
+			BodyPart contentPart = new MimeBodyPart();
+			contentPart.setText("重置密码成功！新密码为 666666");
+			multipart.addBodyPart(contentPart);
+
+			// 将multipart对象放到message中
+			message.setContent(multipart);
+			// 保存邮件
+			message.saveChanges();
+			// 发送邮件
+			Transport transport = emailSession.getTransport("smtp");
+			// 连接服务器的邮箱
+			transport.connect("smtp.163.com","你的邮箱账号","你的邮箱密码");
+			// 把邮件发送出去
+			transport.sendMessage(message, message.getAllRecipients());
+			transport.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("error","密码重置成功，请到邮箱查看");
+		
+		return "user_reset_password";
 	}
 }

@@ -27,7 +27,7 @@ public class ClientLeftInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse arg1, Object arg2) throws Exception {
 		// 获取板块列表
-		List<Plate> plates = serverService.findAllPlates();
+		List<Plate> plates = serverService.findAllUnEnablePlates();
 		// 获取分类列表、
 		List<Category> categories = serverService.findAllCategories();
 		// 放入数据

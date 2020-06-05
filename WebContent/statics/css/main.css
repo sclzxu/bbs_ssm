@@ -208,6 +208,7 @@ ul.userDropdown li a:hover { border-right: none; border-left: none; }
 .sInbox { background: url(../image/icons/topnav/subInbox.png) no-repeat 11px; }
 .sOutbox { background: url(../image/icons/topnav/subOutbox.png) no-repeat 11px; }
 .sTrash { background: url(../image/icons/topnav/subTrash.png) no-repeat 11px; }
+.tasks { background: url(../image/icons/topnav/tasks.png) no-repeat 11px; }
 
 
 

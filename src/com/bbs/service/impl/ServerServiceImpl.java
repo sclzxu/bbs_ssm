@@ -127,5 +127,10 @@ public class ServerServiceImpl implements ServerService {
 	public int updateIsPassById(String invitationId, Integer isPass) {
 		return invitationMapper.updateIsPassById(invitationId, isPass);
 	}
+	// 获取所有未屏蔽的板块
+	@Override
+	public List<Plate> findAllUnEnablePlates() {
+		return plateMapper.findAllUnEnablePlates();
+	}
 
 }

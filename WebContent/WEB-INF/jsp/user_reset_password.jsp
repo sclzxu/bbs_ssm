@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>注册</title>
+<title>密码重置</title>
 <link href="${pageContext.request.contextPath}/statics/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
@@ -68,7 +67,7 @@
 
 <body>
 <!-- Left side content -->
-<%@ include file="client/client_left.jsp" %>
+<%@ include file="server/server_left.jsp" %>
 
 <!-- Right side -->
 <div id="rightSide">
@@ -88,55 +87,34 @@
             <p>${error }</p>
         </div>
         <!-- Validation form -->
-        <form:form cssClass="form" method="post" modelAttribute="user"
-        	action="${pageContext.request.contextPath}/regist">
+        <form action="${pageContext.request.contextPath}/user_reset_password" class="form" method="post">
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>账户注册</h6></div>
+                    <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/alert.png" alt="" class="titleIcon" /><h6>重置密码</h6></div>
                     <div class="formRow">
-                    	<form:label path="userId">账户名:<span class="req">*</span></form:label>
+                    	<label for="userId">账户名:<span class="req">*</span></label>
                         <div class="formRight">
-                        	<form:input path="userId"/>
-                        	<form:errors path="userId" cssStyle="color:red;"/>
-                        </div><div class="clear"></div>
+                        	<input type="text" id="userId" name="userId"/>
+                        </div>
+                        <div class="clear"></div>
                     </div>
                     <div class="formRow">
-                    	<form:label path="userPsw">密码:<span class="req">*</span></form:label>
+                    	<label for="yzm">验证码:<span class="req">*</span></label>
                         <div class="formRight">
-                        	<form:password path="userPsw"/>
-                        	<form:errors path="userPsw" cssStyle="color:red;"/>
-                        </div><div class="clear"></div>
-                    </div>
-                    <div class="formRow">
-                        <label for="reUserPsw">确认密码:<span class="req">*</span></label>
-                        <div class="formRight"><input type="password" name="reUserPsw" id="reUserPsw" /></div><div class="clear"></div>
-                    </div>
-                    <div class="formRow">
-                    	<form:label path="userAlice">昵称:</form:label>
-                        <div class="formRight"><form:input path="userAlice"/></div><div class="clear"></div>
-                    </div>
-                    <div class="formRow">
-                    	<form:label path="userEmail">邮箱:</form:label>
-                        <div class="formRight"><form:input path="userEmail"/></div><div class="clear"></div>
-                    </div>
-                     <div class="formRow">
-                    	<form:label path="userSex">性别:</form:label>
-                        <div class="formRight">
-                        	<div class="floatL"></div>
-                        	<div class="floatL" style="margin: 2px 0 0 10px;">
-                        		<form:radiobutton path="userSex" value="男"/>男&nbsp;&nbsp;&nbsp;&nbsp;
+                        	<div class="oneTwo"><input type="text" id="yzm" name="yzm"/></div>
+                        	<div class="oneTwo">
+                        		<img id="codeImg" style="height:30px;" src="${pageContext.request.contextPath}/code_img"/>
+                        		<a href="javascript:changeImg();" rel="external nofollow">看不清</a>
                         	</div>
-                        	<div class="floatL" style="margin: 2px 0 0 0;">
-                        		<form:radiobutton path="userSex" value="女"/>女
-                        	</div>
-                        </div><div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="formSubmit"><input type="submit" value="注册" class="redB" /></div>
+                    <div class="formSubmit"><input type="submit" value="重置密码" class="redB" /></div>
                     <div class="clear"></div>
                 </div>
                 
             </fieldset>
-        </form:form>      
+        </form>    
        	
     </div>
     
@@ -146,7 +124,12 @@
 </div>
 
 <div class="clear"></div>
-
+<script>
+   function changeImg(){
+     var img = document.getElementById("codeImg");
+     img.src="${pageContext.request.contextPath}/code_img?"+new Date().getTime();
+   }
+ </script>
 </body>
 </html>
     

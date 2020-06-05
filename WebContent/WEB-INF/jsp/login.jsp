@@ -107,7 +107,7 @@
                 
                 <div class="loginControl">
                     <div class="rememberMe">
-                    	<input type="checkbox" id="remMe" name="remMe" /><label for="remMe">记住我</label>
+                    	<a href="${pageContext.request.contextPath}/user_reset_password">密码重置</a>
                     </div>
                     <input type="submit" value="登录" class="dredB logMeIn" />
                     <div class="clear"></div>

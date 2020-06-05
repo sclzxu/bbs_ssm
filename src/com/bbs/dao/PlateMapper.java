@@ -18,4 +18,6 @@ public interface PlateMapper {
 	Plate findPlateById(Integer plateId);
 	
 	int updatePlateById(Plate plate);
+	
+	List<Plate> findAllUnEnablePlates();
 }

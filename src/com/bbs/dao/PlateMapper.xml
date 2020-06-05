@@ -33,6 +33,10 @@
 		update bbs_plate set plateTitle=#{plateTitle},plateMessage=#{plateMessage}
 			where plateId=#{plateId}
 	</update>
+	<!-- 获取所有未屏蔽的 Plate -->
+	<select id="findAllUnEnablePlates" resultType="Plate">
+		select * from bbs_plate where isEnable=0
+	</select>
 </mapper>
 
 

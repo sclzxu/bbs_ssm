@@ -45,6 +45,8 @@ public interface ServerService {
 	int updateUserLockById(User user);
 	
 	int updateIsPassById(String invitationId,Integer isPass);
+	
+	List<Plate> findAllUnEnablePlates();
 }
 
 
