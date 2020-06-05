@@ -1,6 +1,7 @@
 package com.bbs.controller;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -254,12 +255,18 @@ public class ClientController {
 	public String clientInvitationPerson(@PathVariable String invitationId,Model model) {
 		Invitation invitation = clientService.findInvitationById(invitationId);
 		model.addAttribute("invitation",invitation);
+		// 获取此贴的回复
+		model.addAttribute("anss",
+				clientService.findInvitationAnsByInvitationId(invitationId));
 		return "client_invitation_person";
 	}
 	// 实现修改贴子功能
 	@RequestMapping(value="client_invitation_person",method=RequestMethod.POST)
 	public String clientInvitationPerson(
 			@ModelAttribute("invitation") Invitation invitation,Model model) {
+		// 获取此贴的回复
+		model.addAttribute("anss",
+				clientService.findInvitationAnsByInvitationId(invitation.getInvitationId()));
 		// 验证 title 非空
 		if(StringUtils.isNullOrEmpty(invitation.getInvitationTitle())) {
 			model.addAttribute("error","标题不能为空！");
@@ -269,8 +276,23 @@ public class ClientController {
 		invitation.setIsPass(0);
 		invitation.setInvitationModify(new Date());
 		clientService.updateInvitationById(invitation);
+		// 解码
+		String title = null;
+		String meg = null;
+		try {
+			// 对内容进行解码处理(采用UTF-8编码格式)
+			title = URLDecoder.decode(invitation.getInvitationTitle(),"utf-8");
+			meg = URLDecoder.decode(invitation.getInvitationMessage(),"utf-8");
+			// 屏蔽掉敏感内容
+			meg = meg.replaceAll("(共产党)|(操)","*");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		invitation.setInvitationTitle(title);
+		invitation.setInvitationMessage(meg);
+		model.addAttribute("error","贴子修改成功");
 		
-		return "redirect:/client/client_invitation_person/"+invitation.getInvitationId();
+		return "client_invitation_person";
 	}
 }
 

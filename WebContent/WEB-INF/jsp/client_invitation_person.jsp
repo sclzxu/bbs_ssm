@@ -113,6 +113,23 @@
 				</c:choose>
 				<div class="clear"></div>
 			</div>
+			
+			<div class="clear" style="border-bottom: 20px solid #EEE;"></div>
+			<!-- 帖子回复 -->
+			<c:forEach items="${anss }" var="ans">
+			<div class="formRow">
+				<div class="wUserInfo">
+					<a class="wUserPic"><img style="width:40px;" src="${pageContext.request.contextPath}/statics/file/${ans.user.userPhoto}" alt="" /></a>
+       				<ul class="leftList">
+    					<li><a><strong>${ans.user.userAlice }</strong></a></li>
+               			<li><a><strong><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/></strong></a></li>
+                    </ul>
+           			<div class="formRight">${ans.ansMessage }</div>
+         			<div class="clear"></div>
+       			</div>
+				<div class="clear"></div>
+			</div>
+			</c:forEach>
 		</fieldset>
 	</form>
     </div>

@@ -113,7 +113,14 @@
             	</c:choose>
             	</td>
             	<td class="center">
-            		<a href="#/${inv.invitationId}">删除</a>
+            		<c:choose>
+            			<c:when test="${inv.isPass==0}">
+            				&nbsp;
+            			</c:when>
+            			<c:otherwise>
+            				<a href="#/${inv.invitationId}">删除</a>
+            			</c:otherwise>
+            		</c:choose>
             	</td>
             	</tr>
             </c:forEach>
