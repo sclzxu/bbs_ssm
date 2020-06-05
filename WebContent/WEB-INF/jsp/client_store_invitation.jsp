@@ -95,10 +95,22 @@
             <c:forEach items="${invitations}" var="inv">
             <tr class="gradeC">
             	<td><fmt:formatDate value="${inv.invitationCreate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-            	<td><a href="${pageContext.request.contextPath}/client_view_invitation/${inv.invitationId}">${inv.invitationTitle}</a></td>
+            	<td>
+            		<c:choose>
+            			<c:when test="${inv.isEnable==1}">
+                        	<a href="javascript:alert('贴子已经被删除！');"><span>${inv.invitationTitle }</span></a>
+            			</c:when>
+            			<c:when test="${inv.isPass!=1}">
+            				<a href="javascript:alert('贴子正在审核中...');"><span>${inv.invitationTitle }</span></a>
+            			</c:when>
+            			<c:otherwise>
+            				<a href="${pageContext.request.contextPath}/client_view_invitation/${inv.invitationId}">${inv.invitationTitle}</a>
+            			</c:otherwise>
+            		</c:choose>
+            	</td>
             	<td>${inv.plate.plateTitle}</td>
             	<td class="center">${inv.category.category}</td>
-            	<td class="center"><a href="${pageContext.request.contextPath}/client/del_invitation_inter?invitationId=${inv.invitationId}"><strong>取消收藏</strong></a></td>
+            	<td class="center"><a href="${pageContext.request.contextPath}/client/del_invitation_inter2?invitationId=${inv.invitationId}"><strong>取消收藏</strong></a></td>
             </tr>
             </c:forEach>
             </tbody>

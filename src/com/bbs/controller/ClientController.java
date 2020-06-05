@@ -312,6 +312,19 @@ public class ClientController {
 		model.addAttribute("invitations", invitaions);
 		return "client_store_invitation";
 	}
+	// 取消收藏贴子2
+	@RequestMapping("/del_invitation_inter2")
+	public String delInvitationInter2(String invitationId,
+			HttpSession session,Model model) {
+		// 删除表 bbs_invitation_inter 中对应的记录
+		User loginer = (User)session.getAttribute("loginer");
+		clientService.delInvitationInterByUidAndIid(loginer.getUserId(),invitationId);
+		// 获取所有收藏的贴子列表
+		List<Invitation> invitaions 
+			= clientService.findAllStoreInvitations(loginer.getUserId());
+		model.addAttribute("invitations", invitaions);
+		return "client_store_invitation";
+	}
 }
 
 
