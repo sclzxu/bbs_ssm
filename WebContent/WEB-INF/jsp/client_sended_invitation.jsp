@@ -89,6 +89,7 @@
             <th>板块</th>
             <th>分类</th>
             <th>审核状态</th>
+            <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -110,6 +111,9 @@
             			<span style="color: red;">审核失败</span>
             		</c:otherwise>
             	</c:choose>
+            	</td>
+            	<td class="center">
+            		<a href="#/${inv.invitationId}">删除</a>
             	</td>
             	</tr>
             </c:forEach>

@@ -44,4 +44,6 @@ public interface ClientService {
 	List<Invitation> findCreamByPlateId(Integer plateId);
 	
 	List<Invitation> findAllInvitationsByUid(String userId);
+	
+	int updateInvitationById(Invitation invitation);
 }

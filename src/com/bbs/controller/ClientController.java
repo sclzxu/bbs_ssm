@@ -16,6 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -254,6 +255,22 @@ public class ClientController {
 		Invitation invitation = clientService.findInvitationById(invitationId);
 		model.addAttribute("invitation",invitation);
 		return "client_invitation_person";
+	}
+	// 实现修改贴子功能
+	@RequestMapping(value="client_invitation_person",method=RequestMethod.POST)
+	public String clientInvitationPerson(
+			@ModelAttribute("invitation") Invitation invitation,Model model) {
+		// 验证 title 非空
+		if(StringUtils.isNullOrEmpty(invitation.getInvitationTitle())) {
+			model.addAttribute("error","标题不能为空！");
+			return "client_invitation_person";
+		}
+		// 修改数据库中对应记录
+		invitation.setIsPass(0);
+		invitation.setInvitationModify(new Date());
+		clientService.updateInvitationById(invitation);
+		
+		return "redirect:/client/client_invitation_person/"+invitation.getInvitationId();
 	}
 }
 

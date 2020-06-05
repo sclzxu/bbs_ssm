@@ -85,7 +85,7 @@
         <div class="nNote nInformation hideit">
             <p>${error }</p>
         </div>
-    	<form class="form" method="post" action="">
+    	<form class="form" method="post" action="${pageContext.request.contextPath}/client/client_invitation_person">
 		<input type="hidden" name="invitationId" value="${invitation.invitationId}"/>
 		<input type="hidden" name="invitationMessage" id="invitationMessage"/>
 		<fieldset>

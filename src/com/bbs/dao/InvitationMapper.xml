@@ -124,6 +124,13 @@
 			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
 			where bbs_invitation.userId=#{userId}
 	</select>
+	<!-- 根据 invitationId 修改 Invitation -->
+	<update id="updateInvitationById" parameterType="Invitation">
+		update bbs_invitation set invitationTitle=#{invitationTitle},
+			invitationMessage=#{invitationMessage},isPass=#{isPass},
+			invitationModify=#{invitationModify} 
+			where invitationId=#{invitationId}
+	</update>
 </mapper>
 
 

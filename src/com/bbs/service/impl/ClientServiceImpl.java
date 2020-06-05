@@ -244,6 +244,22 @@ public class ClientServiceImpl implements ClientService {
 		}
 		return invitations;
 	}
+	// 根据 invitationId 修改 Invitation
+	@Override
+	public int updateInvitationById(Invitation invitation) {
+		String title = null;
+		String meg = null;
+		try {
+			// 对内容进行解码处理(采用UTF-8编码格式)
+			title = URLEncoder.encode(invitation.getInvitationTitle(), "utf-8");
+			meg = URLEncoder.encode(invitation.getInvitationMessage(), "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		invitation.setInvitationTitle(title);
+		invitation.setInvitationMessage(meg);
+		return invitationMapper.updateInvitationById(invitation);
+	}
 	
 }
 
