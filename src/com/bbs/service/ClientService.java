@@ -50,4 +50,6 @@ public interface ClientService {
 	int delInvitationById(String invitationId);
 	
 	List<Invitation> findAllStoreInvitations(String userId);
+	
+	List<Invitation> findAllAnsInvitations(String userId);
 }

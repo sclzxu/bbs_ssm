@@ -325,6 +325,17 @@ public class ClientController {
 		model.addAttribute("invitations", invitaions);
 		return "client_store_invitation";
 	}
+	// 跳转到 client_ans_invitation 页面
+	@RequestMapping(value="/client_ans_invitation",method=RequestMethod.GET)
+	public String clientAnsInvitation(HttpSession session,Model model) {
+		// 获取登录账户
+		User loginer = (User)session.getAttribute("loginer");
+		// 获取所有参与的贴子列表
+		List<Invitation> invitaions 
+			= clientService.findAllAnsInvitations(loginer.getUserId());
+		model.addAttribute("invitations", invitaions);
+		return "client_ans_invitation";
+	}
 }
 
 

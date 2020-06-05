@@ -286,6 +286,27 @@ public class ClientServiceImpl implements ClientService {
 		}
 		return invitations;
 	}
+	// 根据用户id获取所有参与的贴子
+	@Override
+	public List<Invitation> findAllAnsInvitations(String userId) {
+		List<Invitation> invitations = invitationMapper.findAllAnsInvitations(userId);
+		String title = null;
+		String meg = null;
+		for(Invitation inv : invitations) {
+			try {
+				// 对内容进行解码处理(采用UTF-8编码格式)
+				title = URLDecoder.decode(inv.getInvitationTitle(),"utf-8");
+				meg = URLDecoder.decode(inv.getInvitationMessage(),"utf-8");
+				// 屏蔽掉敏感内容
+				meg = meg.replaceAll("(共产党)|(操)","*");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			inv.setInvitationTitle(title);
+			inv.setInvitationMessage(meg);
+		}
+		return invitations;
+	}
 	
 }
 

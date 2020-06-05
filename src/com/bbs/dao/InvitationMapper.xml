@@ -154,6 +154,21 @@
 				on bbs_invitation.invitationId=bbs_invitation_inter.invitationId
 			where bbs_invitation_inter.storeUserId=#{userId}
 	</select>
+	<!-- 根据用户id获取所有参与的贴子 -->
+	<select id="findAllAnsInvitations" parameterType="string" resultMap="invitationMap"> 
+		select bbs_invitation.invitationId,invitationTitle,invitationMessage,
+			bbs_invitation.userId,bbs_invitation.plateId,bbs_invitation.categoryId,
+			bbs_invitation.isPass invitationIsPass,
+			bbs_invitation.isEnable invitationIsEnable,
+			invitationCreate,invitationModify,plateTitle,userAlice,category
+			from bbs_invitation left join bbs_user 
+			on bbs_invitation.userId=bbs_user.userId
+			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
+			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+			left join bbs_invitation_ans 
+				on bbs_invitation.invitationId=bbs_invitation_ans.invitationId
+			where bbs_invitation_ans.userId=#{userId}
+	</select>
 </mapper>
 
 

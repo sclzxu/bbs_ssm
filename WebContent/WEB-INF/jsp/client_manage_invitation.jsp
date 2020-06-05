@@ -93,7 +93,7 @@
             </div>
         	<div class="oneThree">
             	<div class="widget">
-                	<div class="title"><h6><a href="#">参与贴子</a></h6></div>
+                	<div class="title"><h6><a href="${pageContext.request.contextPath}/client/client_ans_invitation">参与贴子</a></h6></div>
                     <p>用户个人参与过评论的贴子列表</p>
                 </div>
             </div>

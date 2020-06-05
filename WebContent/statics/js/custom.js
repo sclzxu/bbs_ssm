@@ -806,8 +806,8 @@ $(function() {
 		}
 	});
 	
-	$( "#opener" ).click(function() {
-		$( "#dialog-message" ).dialog( "open" );
+	$("#opener").click(function() {
+		$("#dialog-message").dialog( "open" );
 		return false;
 	});	
 		

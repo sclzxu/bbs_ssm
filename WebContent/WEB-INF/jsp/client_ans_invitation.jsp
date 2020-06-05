@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>个人收藏</title>
+<title>参与贴子</title>
 <link href="${pageContext.request.contextPath}/statics/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
@@ -80,7 +80,7 @@
     <div class="wrapper">
         <!-- Dynamic table -->
         <div class="widget">
-            <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/full2.png" alt="" class="titleIcon" /><h6>个人收藏</h6></div>                          
+            <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/full2.png" alt="" class="titleIcon" /><h6>参与贴子</h6></div>                          
             <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
             <thead>
             <tr>
@@ -88,7 +88,6 @@
             <th>标题</th>
             <th>板块</th>
             <th>分类</th>
-            <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -110,7 +109,6 @@
             	</td>
             	<td>${inv.plate.plateTitle}</td>
             	<td class="center">${inv.category.category}</td>
-            	<td class="center"><a href="${pageContext.request.contextPath}/client/del_invitation_inter2?invitationId=${inv.invitationId}"><strong>取消收藏</strong></a></td>
             </tr>
             </c:forEach>
             </tbody>
