@@ -250,6 +250,12 @@ public class ClientController {
 		model.addAttribute("invitations",clientService.findAllInvitationsByUid(loginer.getUserId()));
 		return "client_sended_invitation";
 	}
+	// 删除用户发表贴子
+	@RequestMapping(value="/del_invitation_byid/{invitationId}",method=RequestMethod.GET)
+	public String delInvitationById(@PathVariable String invitationId) {
+		clientService.delInvitationById(invitationId);
+		return "redirect:/client/client_sended_invitation";
+	}
 	// 跳转到 client_invitation_person
 	@RequestMapping(value="client_invitation_person/{invitationId}",method=RequestMethod.GET)
 	public String clientInvitationPerson(@PathVariable String invitationId,Model model) {

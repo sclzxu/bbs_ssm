@@ -260,6 +260,11 @@ public class ClientServiceImpl implements ClientService {
 		invitation.setInvitationMessage(meg);
 		return invitationMapper.updateInvitationById(invitation);
 	}
+	// 删除贴子（把isEnable设置为1）
+	@Override
+	public int delInvitationById(String invitationId) {
+		return invitationMapper.delInvitationById(invitationId);
+	}
 	
 }
 

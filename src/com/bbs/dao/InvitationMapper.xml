@@ -40,6 +40,7 @@
 			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
 			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
 			where bbs_invitation.isPass=#{isPass}
+			and bbs_invitation.isEnable=0
 			<if test="plateId!=null and plateId!=0">
 				and bbs_plate.plateId=#{plateId}
 			</if>
@@ -54,7 +55,7 @@
 			bbs_invitation.isPass invitationIsPass,
 			bbs_invitation.isEnable invitationIsEnable,
 			invitationCreate,invitationModify,plateTitle,userAlice,category,
-			userPhoto
+			userPhoto,bbs_invitation.isEnable invitationIsEnable
 			from bbs_invitation left join bbs_user 
 			on bbs_invitation.userId=bbs_user.userId
 			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
@@ -81,6 +82,7 @@
 			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
 			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
 			where bbs_invitation.isPass=1
+			and bbs_invitation.isEnable=0
 			and bbs_invitation.invitationId in(
 				select bbs_invitation_inter.invitationId from bbs_invitation_inter
 					group by bbs_invitation_inter.invitationId 
@@ -99,6 +101,7 @@
 		left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
 		left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
 		where bbs_invitation.isPass=1
+		and bbs_invitation.isEnable=0
 		and bbs_plate.plateId=#{plateId}
 		and bbs_invitation.invitationId in(
 			select bbs_invitation.invitationId
@@ -122,7 +125,8 @@
 			from bbs_invitation
 			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
 			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
-			where bbs_invitation.userId=#{userId}
+			where bbs_invitation.isEnable=0
+			and bbs_invitation.userId=#{userId}
 	</select>
 	<!-- 根据 invitationId 修改 Invitation -->
 	<update id="updateInvitationById" parameterType="Invitation">
@@ -130,6 +134,10 @@
 			invitationMessage=#{invitationMessage},isPass=#{isPass},
 			invitationModify=#{invitationModify} 
 			where invitationId=#{invitationId}
+	</update>
+	<!-- 删除贴子（把isEnable设置为1） -->
+	<update id="delInvitationById" parameterType="string">
+		update bbs_invitation set isEnable=1 where invitationId=#{invitationId}
 	</update>
 </mapper>
 

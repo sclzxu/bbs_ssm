@@ -30,4 +30,6 @@ public interface InvitationMapper {
 	List<Invitation> findAllInvitationsByUid(String userId);
 	
 	int updateInvitationById(Invitation invitation);
+	
+	int delInvitationById(String invitationId);
 }

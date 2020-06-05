@@ -118,7 +118,7 @@
             				&nbsp;
             			</c:when>
             			<c:otherwise>
-            				<a href="#/${inv.invitationId}">删除</a>
+            				<a href="${pageContext.request.contextPath}/client/del_invitation_byid/${inv.invitationId}">删除</a>
             			</c:otherwise>
             		</c:choose>
             	</td>
