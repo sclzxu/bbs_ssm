@@ -48,4 +48,6 @@ public interface ClientService {
 	int updateInvitationById(Invitation invitation);
 	
 	int delInvitationById(String invitationId);
+	
+	List<Invitation> findAllStoreInvitations(String userId);
 }

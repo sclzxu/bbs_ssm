@@ -265,6 +265,27 @@ public class ClientServiceImpl implements ClientService {
 	public int delInvitationById(String invitationId) {
 		return invitationMapper.delInvitationById(invitationId);
 	}
+	// 根据用户 id 获取其所有收藏的贴子
+	@Override
+	public List<Invitation> findAllStoreInvitations(String userId) {
+		List<Invitation> invitations = invitationMapper.findAllStoreInvitations(userId);
+		String title = null;
+		String meg = null;
+		for(Invitation inv : invitations) {
+			try {
+				// 对内容进行解码处理(采用UTF-8编码格式)
+				title = URLDecoder.decode(inv.getInvitationTitle(),"utf-8");
+				meg = URLDecoder.decode(inv.getInvitationMessage(),"utf-8");
+				// 屏蔽掉敏感内容
+				meg = meg.replaceAll("(共产党)|(操)","*");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			inv.setInvitationTitle(title);
+			inv.setInvitationMessage(meg);
+		}
+		return invitations;
+	}
 	
 }
 

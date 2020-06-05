@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>贴子管理</title>
+<title>个人收藏</title>
 <link href="${pageContext.request.contextPath}/statics/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
@@ -57,11 +59,9 @@
 
 <script src="${pageContext.request.contextPath}/statics/js/custom.js"></script>
 
-<!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  -->
-</head>
+<!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  --></head>
 
 <body>
-
 <!-- Left side content -->
 <%@ include file="client/client_left.jsp" %>
 
@@ -78,26 +78,31 @@
     
     <!-- Main content wrapper -->
     <div class="wrapper">
-    	<div class="widgets">
-        	<div class="oneThree">
-            	<div class="widget">
-                	<div class="title"><h6><a href="${pageContext.request.contextPath}/client/client_sended_invitation">个人发表</a></h6></div>
-                    <p>用户个人发表的贴子列表</p>
-                </div>
-            </div>
-        	<div class="oneThree">
-            	<div class="widget">
-                	<div class="title"><h6><a href="${pageContext.request.contextPath}/client/client_store_invitation">个人收藏</a></h6></div>
-                    <p>用户个人收藏的贴子列表</p>
-                </div>
-            </div>
-        	<div class="oneThree">
-            	<div class="widget">
-                	<div class="title"><h6><a href="#">参与贴子</a></h6></div>
-                    <p>用户个人参与过评论的贴子列表</p>
-                </div>
-            </div>
-            <div class="clear"></div>
+        <!-- Dynamic table -->
+        <div class="widget">
+            <div class="title"><img src="${pageContext.request.contextPath}/statics/image/icons/dark/full2.png" alt="" class="titleIcon" /><h6>个人收藏</h6></div>                          
+            <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
+            <thead>
+            <tr>
+            <th>发帖日期</th>
+            <th>标题</th>
+            <th>板块</th>
+            <th>分类</th>
+            <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${invitations}" var="inv">
+            <tr class="gradeC">
+            	<td><fmt:formatDate value="${inv.invitationCreate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            	<td><a href="${pageContext.request.contextPath}/client_view_invitation/${inv.invitationId}">${inv.invitationTitle}</a></td>
+            	<td>${inv.plate.plateTitle}</td>
+            	<td class="center">${inv.category.category}</td>
+            	<td class="center"><a href="${pageContext.request.contextPath}/client/del_invitation_inter?invitationId=${inv.invitationId}"><strong>取消收藏</strong></a></td>
+            </tr>
+            </c:forEach>
+            </tbody>
+            </table>  
         </div>
     </div>
     
@@ -107,7 +112,12 @@
 </div>
 
 <div class="clear"></div>
+<script>
+$(function(){
+	// 触发点击 “<th>发帖日期</th>” 单击事件
+	$(".dTable").find("th").first().trigger("click");
+});
+</script>
 </body>
 </html>
-
     

@@ -139,6 +139,21 @@
 	<update id="delInvitationById" parameterType="string">
 		update bbs_invitation set isEnable=1 where invitationId=#{invitationId}
 	</update>
+	<!-- 根据用户 id 获取其所有收藏的贴子 -->
+	<select id="findAllStoreInvitations" parameterType="string" resultMap="invitationMap"> 
+		select bbs_invitation.invitationId,invitationTitle,invitationMessage,
+			bbs_invitation.userId,bbs_invitation.plateId,bbs_invitation.categoryId,
+			bbs_invitation.isPass invitationIsPass,
+			bbs_invitation.isEnable invitationIsEnable,
+			invitationCreate,invitationModify,plateTitle,userAlice,category
+			from bbs_invitation left join bbs_user 
+			on bbs_invitation.userId=bbs_user.userId
+			left join bbs_plate on bbs_invitation.plateId=bbs_plate.plateId
+			left join bbs_category on bbs_invitation.categoryId=bbs_category.categoryId
+			left join bbs_invitation_inter 
+				on bbs_invitation.invitationId=bbs_invitation_inter.invitationId
+			where bbs_invitation_inter.storeUserId=#{userId}
+	</select>
 </mapper>
 
 

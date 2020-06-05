@@ -32,4 +32,6 @@ public interface InvitationMapper {
 	int updateInvitationById(Invitation invitation);
 	
 	int delInvitationById(String invitationId);
+	
+	List<Invitation> findAllStoreInvitations(String userId);
 }

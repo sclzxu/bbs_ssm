@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -299,6 +300,17 @@ public class ClientController {
 		model.addAttribute("error","贴子修改成功");
 		
 		return "client_invitation_person";
+	}
+	// 跳转到 client_store_invitation 页面
+	@RequestMapping(value="/client_store_invitation",method=RequestMethod.GET)
+	public String clientStoreInvitation(HttpSession session,Model model) {
+		// 获取登录账户
+		User loginer = (User)session.getAttribute("loginer");
+		// 获取所有收藏的贴子列表
+		List<Invitation> invitaions 
+			= clientService.findAllStoreInvitations(loginer.getUserId());
+		model.addAttribute("invitations", invitaions);
+		return "client_store_invitation";
 	}
 }
 
